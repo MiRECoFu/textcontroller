@@ -1,21 +1,41 @@
-/* Base Application Styles */
-body {
-  color: #fff;
-  background: #222;
+html,body{
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+}
+.content{
+  width: 100%;
+  height: 100%;
+}
+.workplace{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+}
+.controllnav{
+  width: 18%;
+  height: 100%;
+  background-color: #fff;
+  float: left;
+  position: relative;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
+.chaps{
+  width: 100%;
+  height: 70px;
+  background-color: #fff;
+  position: absolute;
 }
-
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+.newchap{
+  width: 50%;
+  height: 60px;
+  margin-left: 25%;
+  margin-top: 20px;
+}
+.chap{
+  width: 100%;
+  height: 100px;
+  background-color: #fa8072;
+  border-bottom: #f43e4b solid;
 }
