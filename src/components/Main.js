@@ -1,13 +1,34 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-//let yeomanImage = require('../images/yeoman.png');
+import {BosClient} from 'bce-sdk-js';
 
+const config = {
+  endpoint: 'http://gz.bcebos.com',         //传入Bucket所在区域域名
+  credentials: {
+      ak: '6bb013b74f43441aa2961130a550837d',         //您的AccessKey
+      sk: '114576782dd448b89c8e4b2b2db551be'       //您的SecretAccessKey
+  }
+};
+
+let bucket = 'my-bucket';
+let key = 'hello.js';
+let client = new BosClient(config);
+/*
+client.putObjectFromFile(bucket, key, __filename)
+  .then(response => console.log(response))    // 成功
+  .catch(error => console.error(error));      // 失败
+
+  */
+
+  client.putObjectFromString(bucket, key, 'hello world')
+    .then(response => console.log(response))    // 成功
+    .catch(error => console.error(error));
 
 //拿到储存章节信息的json文件，转化为数组
-//let chapterDatas = require('../data/chapterData.json');
 
 let chapterDatas = [
   {
@@ -70,19 +91,13 @@ class AppComponent extends React.Component {
 
   render() {
 
-  let chapIndex = [];
-
-  //  chapIndex.push(<ChapIndexs name=""/>);
-  for(let i=0;i<=chapterDatas.length;i++) {
-    chapIndex.push(<ChapIndexs name="" key=""/>)
-  }
 
     return (
       <section className="workplace" ref="workplace">
         <section className="controllnav">
 
               <section className="chaps" ref="chaps">
-                {chapIndex}
+                <ChapIndexs/>
               </section>
 
         </section>
