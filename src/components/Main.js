@@ -6,6 +6,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BosClient} from 'bce-sdk-js';
 
+import AMUIReact from 'amazeui-react';
+var Button = AMUIReact.Button;
+var Icon = AMUIReact.Icon;
+
 const config = {
   endpoint: 'http://gz.bcebos.com',         //传入Bucket所在区域域名
   credentials: {
@@ -94,6 +98,22 @@ class ChapIndexs extends React.Component {
             let key = chapterDatas.indexOf(name);
             return(
               <div className='chap'  key={key}>
+              
+                <Button>
+                  <Icon icon="cog" /> 设置
+                </Button>
+
+                <Button amStyle="warning">
+                  <Icon icon="shopping-cart" /> 败家
+                </Button>
+
+                <Button>
+                  <Icon icon="spinner" spin /> Loading
+                </Button>
+                <div>
+                    <p><Icon icon="qq" /> QQ</p>
+                    <p><Icon icon="weixin" /> Wechat</p>
+                </div>
 
                 <span>Chapter{key+1} :</span>
                 <span>{chapterDatas[key].chapterName}</span>
