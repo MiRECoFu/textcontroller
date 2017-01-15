@@ -17,23 +17,19 @@ const config = {
 let bucket = 'my-bucket';
 let key = 'hello.js';
 let client = new BosClient(config);
+
 /*
-client.putObjectFromFile(bucket, key, __filename)
-  .then(response => console.log(response))    // 成功
-  .catch(error => console.error(error));      // 失败
-
-  */
-
   client.putObjectFromString(bucket, key, 'hello world')
     .then(response => console.log(response))    // 成功
     .catch(error => console.error(error));
+    */
 
 //拿到储存章节信息的json文件，转化为数组
 
 let chapterDatas = [
   {
-    'chapterIndex':1,
-    'chapterName':''
+    chapterIndex:1,
+    chapterName:'哈哈哈'
   }
 ];
 
@@ -43,23 +39,43 @@ class ChapIndexs extends React.Component {
     super(props);
     this.state = {
               add: false,
-              delete: false
+              delete: false,
+              chapName: '点击修改章节名'
             };
   }
   //点击为chapterDatas数组添加新的一组章节数据项
-    _add(){
+    _add(e){
       chapterDatas.push({
-        'chapterIndex':chapterDatas.length + 1,
-        'chapterName':''
+        chapterIndex:chapterDatas.length + 1,
+        chapterName:''
       });
-      //console.log(chapterDatas.indexOf(chapterdata))
+
+
+      console.log(chapterDatas[chapterDatas.length-1]);
+      let chapi = [];
+      chapterDatas.forEach(function(v){chapi.push(v.chapterIndex)});
+      console.log(chapi[chapi.length-1]);
+
       this.setState({
         add: true
       })
+
+      e.stopPropagation();
+      e.preventDefault();
     }
 
-  render() {
 
+  //点击删除某一章节节点信息
+    _delete(index){
+          chapterDatas.splice(chapterDatas.indexOf(index),1);
+          this.setState({
+            delete: true
+          })
+        }
+
+    //_nameChange
+
+  render() {
 
     return (
       <div>
@@ -67,8 +83,26 @@ class ChapIndexs extends React.Component {
           chapterDatas.map((name)=>{
             let key = chapterDatas.indexOf(name);
             return(
-              <div className="chap" ref={'chap'+name} key={key}>
-                <span>Chapter{key+1}</span>
+              <div className='chap'  key={key}>
+
+                <span>Chapter{key+1} :</span>
+
+                <span>{chapterDatas[key].chapterName}</span>
+
+                <input type="button" value="编辑"/>
+
+                <input
+                type="button"
+                value="删除"
+                onClick={()=>{this._delete(name)}}
+                />
+
+
+                <input
+                type="text"
+                value={chapterDatas[key].chapterName}
+                />
+
               </div>
             );
           })
