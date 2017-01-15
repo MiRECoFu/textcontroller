@@ -26,12 +26,7 @@ let client = new BosClient(config);
 
 //拿到储存章节信息的json文件，转化为数组
 
-let chapterDatas = [
-  {
-    chapterIndex:1,
-    chapterName:'哈哈哈'
-  }
-];
+let chapterDatas = require('../data/chapData.json');
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -40,7 +35,7 @@ class ChapIndexs extends React.Component {
     this.state = {
               add: false,
               delete: false,
-              chapName: '点击修改章节名'
+              nameChange: false
             };
   }
   //点击为chapterDatas数组添加新的一组章节数据项
@@ -52,6 +47,7 @@ class ChapIndexs extends React.Component {
 
 
       console.log(chapterDatas[chapterDatas.length-1]);
+      //取出每个章节信息的index
       let chapi = [];
       chapterDatas.forEach(function(v){chapi.push(v.chapterIndex)});
       console.log(chapi[chapi.length-1]);
@@ -73,7 +69,21 @@ class ChapIndexs extends React.Component {
           })
         }
 
-    //_nameChange
+    _onChange(e){
+      //取出每个章节信息的Name
+      //let chapN = [];
+      //chapterDatas.forEach(function(v){chapN.push(v.chapterName)});
+
+      chapterDatas[this.refs.cNameValue.name].chapterName = this.refs.cNameValue.value;
+
+      console.log(chapterDatas[this.refs.cNameValue.name].chapterName);
+
+      this.setState({
+        nameChange: true
+      });
+      e.stopPropagation();
+      e.preventDefault();
+    }
 
   render() {
 
@@ -86,23 +96,29 @@ class ChapIndexs extends React.Component {
               <div className='chap'  key={key}>
 
                 <span>Chapter{key+1} :</span>
-
                 <span>{chapterDatas[key].chapterName}</span>
+                <div>{'章节简介：'+chapterDatas[key].chapterSum}</div>
 
                 <input type="button" value="编辑"/>
 
-                <input
-                type="button"
-                value="删除"
-                onClick={()=>{this._delete(name)}}
-                />
+                <div className="editChapP">
 
 
-                <input
-                type="text"
-                value={chapterDatas[key].chapterName}
-                />
+                      <input
+                      type="button"
+                      value="删除"
+                      onClick={()=>{this._delete(name)}}
+                      />
 
+
+                      <input
+                      ref="cNameValue"
+                      type="text"
+                      name={key}
+                      onChange={this._onChange.bind(this)}
+                      />
+
+              </div>
               </div>
             );
           })
