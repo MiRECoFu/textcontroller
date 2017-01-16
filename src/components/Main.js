@@ -30,7 +30,8 @@ let client = new BosClient(config);
 
 //拿到储存章节信息的json文件，转化为数组
 
-let chapterDatas = require('../data/chapData.json');
+let Datas = require('../data/chapData.json');
+let chapterDatas = Datas.data;
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -39,6 +40,7 @@ class ChapIndexs extends React.Component {
     this.state = {
               add: false,
               delete: false,
+              clicked:false,
               nameChange: false
             };
   }
@@ -73,20 +75,22 @@ class ChapIndexs extends React.Component {
           })
         }
 
-    _onChange(e){
+    _onClick(){
+      this.setState({
+        clicked:true
+      })
+    }
+
+    _onChange(key){
       //取出每个章节信息的Name
-      //let chapN = [];
-      //chapterDatas.forEach(function(v){chapN.push(v.chapterName)});
 
-      chapterDatas[this.refs.cNameValue.name].chapterName = this.refs.cNameValue.value;
+      chapterDatas[key].chapterName = this.refs['cNameValue'+key].value;
 
-      console.log(chapterDatas[this.refs.cNameValue.name].chapterName);
+      console.log(chapterDatas[key]);
 
       this.setState({
         nameChange: true
       });
-      e.stopPropagation();
-      e.preventDefault();
     }
 
   render() {
@@ -98,44 +102,22 @@ class ChapIndexs extends React.Component {
             let key = chapterDatas.indexOf(name);
             return(
               <div className='chap'  key={key}>
-              
-                <Button>
-                  <Icon icon="cog" /> 设置
-                </Button>
-
-                <Button amStyle="warning">
-                  <Icon icon="shopping-cart" /> 败家
-                </Button>
-
-                <Button>
-                  <Icon icon="spinner" spin /> Loading
-                </Button>
-                <div>
-                    <p><Icon icon="qq" /> QQ</p>
-                    <p><Icon icon="weixin" /> Wechat</p>
-                </div>
-
                 <span>Chapter{key+1} :</span>
                 <span>{chapterDatas[key].chapterName}</span>
                 <div>{'章节简介：'+chapterDatas[key].chapterSum}</div>
 
-                <input type="button" value="编辑"/>
+                <Button className="setting">编辑</Button>
 
                 <div className="editChapP">
 
 
-                      <input
-                      type="button"
-                      value="删除"
-                      onClick={()=>{this._delete(name)}}
-                      />
+                      <Button onClick={()=>{this._delete(name)}}>删除</Button>
 
 
                       <input
-                      ref="cNameValue"
+                      ref={'cNameValue'+key}
                       type="text"
-                      name={key}
-                      onChange={this._onChange.bind(this)}
+                      onChange={()=>{this._onChange(key)}}
                       />
 
               </div>
@@ -143,11 +125,9 @@ class ChapIndexs extends React.Component {
             );
           })
         }
-        <input  className="newchap"
-                type="button"
-                value="+"
+        <Button  className="newchap"
                 onClick={this._add.bind(this)}
-              />
+              >+</Button>
       </div>
     );
   }
@@ -165,6 +145,22 @@ class AppComponent extends React.Component {
     return (
       <section className="workplace" ref="workplace">
         <section className="controllnav">
+
+              <Button>
+                <Icon icon="cog" /> 设置
+              </Button>
+
+              <Button amStyle="warning">
+                <Icon icon="shopping-cart" /> 败家
+              </Button>
+
+              <Button>
+                <Icon icon="spinner" spin /> Loading
+              </Button>
+              <div>
+                  <p><Icon icon="qq" /> QQ</p>
+                  <p><Icon icon="weixin" /> Wechat</p>
+              </div>
 
               <section className="chaps" ref="chaps">
                 <ChapIndexs/>

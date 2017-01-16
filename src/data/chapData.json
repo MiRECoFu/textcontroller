@@ -1,7 +1,11 @@
-[
-  {
-    "chapterIndex":1,
-    "chapterName":"哈哈哈",
-    "chapterSum":"lalalalal"
-  }
-]
+{
+  "total":0,
+  "data": [
+    {
+      "chapterIndex":1,
+      "chapterName":"哈哈哈",
+      "chapterSum":"lalala",
+      "author":""
+    }
+  ]
+}
