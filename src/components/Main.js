@@ -92,7 +92,7 @@ class ChapIndexs extends React.Component {
       // console.log(count + 'create')
     //let proObj = chapterDatas.slice(chapterDatas.indexOf(obj), chapterDatas.indexOf(obj) + 1)
     subDatas.push({
-      subIndex: this.state.breCont + 1,
+      subIndex: subDatas.length + 1,
       //chapterName: proObj[0].chapterName + '副本',
     });
     //console.log(chapterDatas[chapterDatas.indexOf(obj)].chapterIndex);
