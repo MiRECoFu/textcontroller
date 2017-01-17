@@ -42,6 +42,7 @@ class ChapIndexs extends React.Component {
     this.state = {
       addCont: chapterDatas.length,
       clicked: false,
+<<<<<<< HEAD
       nameChange: false,
       breCont: 0
     };
@@ -49,11 +50,20 @@ class ChapIndexs extends React.Component {
 
   //点击为chapterDatas数组添加新的一组章节数据项
 
+=======
+      nameChange: false
+    };
+  }
+
+  //点击为chapterDatas数组添加新的一组章节数据项
+
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
   _add() {
     let count = this.state.addCont;
     count++;
     this.setState({
         addCont: count,
+<<<<<<< HEAD
         breCont: 0,
       })
       // console.log(count + 'add')
@@ -63,6 +73,13 @@ class ChapIndexs extends React.Component {
       chapterSum: '',
       chapterBre: [],
       childChap: []
+=======
+      })
+      // console.log(count + 'add')
+    chapterDatas.push({
+      chapterIndex: chapterDatas.length + 1,
+      chapterName: chapterDatas.length + 1
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
     });
 
   }
@@ -72,7 +89,10 @@ class ChapIndexs extends React.Component {
   _delete(obj) {
     let count = this.state.addCont;
     count--;
+<<<<<<< HEAD
     //if()
+=======
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
     this.setState({
         addCont: count
       })
@@ -82,6 +102,7 @@ class ChapIndexs extends React.Component {
 
   //创建副本
   _createBre(obj) {
+<<<<<<< HEAD
     let subDatas = chapterDatas[chapterDatas.indexOf(obj)].chapterBre;
     let bcount = subDatas.length;
     bcount++;
@@ -110,6 +131,34 @@ class ChapIndexs extends React.Component {
 
     chapterDatas[key].chapterName = this.refs['cNameValue' + key].value;
 
+=======
+    let count = this.state.addCont;
+    count++;
+    this.setState({
+        addCont: count,
+      })
+      // console.log(count + 'create')
+    let proObj = chapterDatas.slice(chapterDatas.indexOf(obj), chapterDatas.indexOf(obj) + 1)
+    chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, {
+      chapterIndex: chapterDatas.length + 1,
+      chapterName: proObj[0].chapterName + '副本',
+    });
+
+    // this._add()
+  }
+
+  _onClick() {
+    this.setState({
+      clicked: true
+    })
+  }
+
+  _onChange(key) {
+    //取出每个章节信息的Name
+
+    chapterDatas[key].chapterName = this.refs['cNameValue' + key].value;
+
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
     this.setState({
       nameChange: true
     });
@@ -119,7 +168,11 @@ class ChapIndexs extends React.Component {
 
     return (
       <div>
+<<<<<<< HEAD
         <Button
+=======
+        <Button  
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
           className="newchap"
           onClick = {
            this._add.bind(this)
@@ -130,6 +183,7 @@ class ChapIndexs extends React.Component {
         {
           chapterDatas.map((data)=>{
             let key = chapterDatas.indexOf(data);
+<<<<<<< HEAD
             let index = data.chapterIndex;
             let bre = data.chapterBre;
             let name = data.chapterName;
@@ -177,6 +231,25 @@ class ChapIndexs extends React.Component {
                   })
                 }
                 </div>
+=======
+            let name = data.chapterName;
+            
+            return(
+              <div className='chap'  key={key}>
+                <span>Chapter{key+1}: </span>
+                <span>{name}</span>
+                <div>{'章节简介：'+chapterDatas[key].chapterSum}</div>
+                <Button amSize="sm" className="setting">编辑</Button>
+                <div className="editChapP">
+                  <Button  amSize="sm" onClick={()=>{this._delete(data)}}>删除</Button>
+                  <Button  amSize="sm" onClick={()=>{this._createBre(data)}}>创建副本</Button>
+                  <input
+                  ref={'cNameValue'+key}
+                  type="text"
+                  onChange={()=>{this._onChange(key)}}
+                  />
+              </div>
+>>>>>>> e894f4433541b9ea004be58193189f3135001e11
               </div>
             );
           })

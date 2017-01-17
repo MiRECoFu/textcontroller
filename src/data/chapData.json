@@ -5,7 +5,19 @@
       "chapterIndex":1,
       "chapterName":"哈哈哈",
       "chapterSum":"lalala",
-      "author":""
+      "chapterBre":[
+        {
+          "subIndex":1,
+          "subName":"哈哈哈",
+          "subSum":"lalala"
+        }
+      ],
+      "childChap":[
+        {
+          "childIndex":1,
+          "childName":""
+        }
+      ]
     }
   ]
 }
