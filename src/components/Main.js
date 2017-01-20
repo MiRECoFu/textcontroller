@@ -43,6 +43,7 @@ class ChapIndexs extends React.Component {
       addCont: chapterDatas.length,
       clicked: false,
       nameChange: false,
+      subNameChange: false,
       breCont: 0
     };
   }
@@ -93,10 +94,21 @@ class ChapIndexs extends React.Component {
     //let proObj = chapterDatas.slice(chapterDatas.indexOf(obj), chapterDatas.indexOf(obj) + 1)
     subDatas.push({
       subIndex: subDatas.length + 1,
+      subName: '',
+      subSum: ''
       //chapterName: proObj[0].chapterName + '副本',
     });
-    //console.log(chapterDatas[chapterDatas.indexOf(obj)].chapterIndex);
-    // this._add()
+  }
+
+  //删除副本
+  _deleteBre(arr,item) {
+    //let subDatas = chapterDatas[chapterDatas.indexOf(obj)].chapterBre;
+    let bcount = arr.length;
+    bcount--;
+    this.setState({
+        breCont: bcount,
+      })
+    arr.splice(arr.indexOf(item), 1);
   }
 
   _onClick() {
@@ -106,14 +118,21 @@ class ChapIndexs extends React.Component {
   }
 
   _onChange(key) {
-    //取出每个章节信息的Name
-
     chapterDatas[key].chapterName = this.refs['cNameValue' + key].value;
 
     this.setState({
       nameChange: true
     });
   }
+
+//修改副本文件名
+_subChange(arr,k,key){
+  arr[k].subName = this.refs['sNameValue' + k + key].value;
+
+  this.setState({
+    subNameChange: true
+  });
+}
 
   render() {
 
@@ -155,21 +174,22 @@ class ChapIndexs extends React.Component {
                 <div>
                 {
                   bre.map((data)=>{
-                    let key = bre.indexOf(data);
+                    let k = bre.indexOf(data);
                     let subindex = data.subIndex;
                     let subname = data.subName;
 
                     return(
-                      <div className='chap'  key={key}>
-                        <span>Chapter{index+'-'+subindex}: </span>
+                      <div className='subchap'  key={k}>
+                        <span>Chapter{index+'副本'}: </span>
                         <span>{subname}</span>
+                        <div>{'章节简介：'+bre[k].subSum}</div>
                         <Button amSize="sm" className="setting">编辑</Button>
                         <div className="editChapP">
-                            <Button  amSize="sm" onClick={()=>{this._delete(data)}}>删除</Button>
+                            <Button  amSize="sm" onClick={()=>{this._deleteBre(bre,data)}}>删除</Button>
                             <input
-                            ref={'cNameValue'+key}
+                            ref={'sNameValue'+k+key}
                             type="text"
-                            onChange={()=>{this._onChange(key)}}
+                            onChange={()=>{this._subChange(bre,k,key)}}
                             />
                         </div>
                       </div>
