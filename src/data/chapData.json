@@ -5,22 +5,38 @@
       "chapterIndex":1,
       "chapterName":"哈哈哈",
       "chapterSum":"lalala",
+      "childChap":[
+        {
+          "childIndex":1,
+          "childName":"我爱MiRECo"
+        },
+        {
+          "childIndex":2,
+          "childName":"aaaadd"
+        }
+      ],
       "chapterBre":[
         {
           "subIndex":1,
           "subName":"哈哈哈",
-          "subSum":"lalala"
+          "subSum":"lalala",
+          "subchildChap":[
+            {
+              "subchildIndex":1,
+              "subchildName":""
+            }
+          ]
         },
         {
           "subIndex":2,
           "subName":"aaaaaa",
-          "subSum":"lalalaaaaa"
-        }
-      ],
-      "childChap":[
-        {
-          "childIndex":1,
-          "childName":""
+          "subSum":"lalalaaaaa",
+          "subchildChap":[
+            {
+              "subchildIndex":1,
+              "subchildName":""
+            }
+          ]
         }
       ]
     }

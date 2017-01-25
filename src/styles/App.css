@@ -11,22 +11,34 @@ html,body{
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #eee;
+  background-color: #fff;
 }
 .controllnav{
-  width: 18%;
+  width: 24%;
   height: 100%;
-  background-color: #fff;
   float: left;
   position: relative;
-  overflow-y: scroll;
+  overflow-x: visible;
 }
-
+.sumchap{
+  overflow: visible;
+}
 .chaps{
-  width: 100%;
-  height: 70px;
-  background-color: #fff;
+  width: 50%;
+  height: 100%;
+  background-color: #555;
   position: absolute;
+  overflow-y: scroll;
+  overflow-x: visible;
+}
+.chaps::-webkit-scrollbar{
+  display: none;
+}
+.child{
+  display: block;
+}
+.childn{
+  display: none;
 }
 .newchap{
   width: 50%;
@@ -36,6 +48,15 @@ html,body{
   margin-bottom: 20px;
   top: 20px;
 }
+.newchild-chap{
+  width: 50%;
+  height: 60px;
+  margin-left: 25%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  top: 20px;
+  background-color: #fff;
+}
 .chap{
   width: 100%;
   height: 120px;
@@ -43,10 +64,31 @@ html,body{
   border-bottom: #f43e4b solid;
   position: relative;
 }
+.chap:hover{
+  width: 100%;
+  height: 120px;
+  background-color: #f43e4b;
+  border-bottom: #fa8072 solid;
+  position: relative;
+}
 .subchap{
   width: 100%;
   height: 120px;
   background-color: #c6e2ff;
+  border-bottom: #b2dfee solid;
+  position: relative;
+}
+.subchap:hover{
+  width: 100%;
+  height: 120px;
+  background-color: #b2dfee;
+  border-bottom: #c6e2ff solid;
+  position: relative;
+}
+.childblock{
+  width: 100%;
+  height: 120px;
+  background-color: #b4eeb4;
   border-bottom: #b2dfee solid;
   position: relative;
 }
