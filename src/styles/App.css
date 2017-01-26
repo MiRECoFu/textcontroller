@@ -44,6 +44,7 @@ html,body{
   }
   .chapBox{
     background: #ee735c;
+    position: relative;
   }
 
   .inputChap{
@@ -58,6 +59,7 @@ html,body{
   .childChapBox{
     width: 100%;
     background: #ee735c;
+    display: block;
   }
 
 
@@ -75,7 +77,3 @@ html,body{
   width: 200px;
   background: #777;
 }
-
-
-
-

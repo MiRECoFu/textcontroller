@@ -8,12 +8,26 @@
     "childChap": [{
       "mirror": false,
       "chapterId": "",
-      "chapterName": "子章节1"
+      "chapterName": "子章节vv"
     }, {
       "mirror": false,
       "chapterId": "",
       "chapterName": "子章节2"
     }]
 
-  }]
+  },{
+    "chapterId": "id0",
+    "chapterName": "哈哈哈",
+    "chapterSum": "lalala",
+    "mirror": false,
+    "childChap": [{
+      "mirror": false,
+      "chapterId": "",
+      "chapterName": "子章节aaa"
+    }, {
+      "mirror": false,
+      "chapterId": "",
+      "chapterName": "子章节2"
+    }]
+    }]
 }
