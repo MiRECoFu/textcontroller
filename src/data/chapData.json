@@ -1,0 +1,19 @@
+{
+  "total": 0,
+  "data": [{
+    "chapterId": "id0",
+    "chapterName": "哈哈哈",
+    "chapterSum": "lalala",
+    "mirror": false,
+    "childChap": [{
+      "mirror": false,
+      "chapterId": "",
+      "chapterName": "子章节1"
+    }, {
+      "mirror": false,
+      "chapterId": "",
+      "chapterName": "子章节2"
+    }]
+
+  }]
+}
