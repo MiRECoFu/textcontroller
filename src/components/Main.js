@@ -106,7 +106,8 @@ class ChapIndexs extends React.Component {
     chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, nextChap);
   }
 
-  _showChid(obj, key) {
+  _showChid(e, obj, key) {
+    e.stopPropagation();
     this.setState({
       key: key,
       chidvisible: true,
@@ -159,92 +160,84 @@ class ChapIndexs extends React.Component {
     let parentObj;
     let child;
     if (flag) {
-      parentObj = chapterDatas.splice(key, 1);
+      parentObj = chapterDatas.splice(this.state.key, 1);
       child = parentObj[0].childChap;
       console.log(child)
     }
     return (
-      <div className="parent">
-      <div className="header">top</div>
-        <div className="main">
-          <div className="left1">
-            <div className="fatherChap">
-              <Button
-                className="newChap"
-                onClick = {
-                 this._add.bind(this)
-                }
-              >
-                +
-              </Button>
-              {
-                chapterDatas.map((data)=>{
-                  let key = chapterDatas.indexOf(data);
-                  let id = data.chapterId;
-                  let name = data.chapterName;
-                  let text = data.chapterSum;
-                  return(
-                    <div 
-                      className="chapBox"
-                      onClick={()=>{this._showChid(data,key)}}
-                    >
-                      <div className="chapItem">
-                        <span>Chapterid:{id} </span>
-                        <div>章节名: {name}</div>
-                        <div>章节简介: {text}{data.mirror?"副本":null}</div>
-                        <Button amSize="xs" className="setting">编辑</Button>
-                        <span className="editChapP">
-                            <Button  amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
-                            <Button  amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
-                            <Button  amSize="xs" onClick={()=>{this._createChild(data)}}>创建子章节</Button>
-                            <Input 
-                              className="inputChap"
-                              radius 
-                              placeholder="输入章节名"
-                              onChange={()=>{this._onChange(data)}}
-                            />
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })
+      <div className="chapIndex">
+        <div className="left1">
+          <div className="fatherChap">
+            <Button
+              className="newChap"
+              onClick = {
+               this._add.bind(this)
               }
-            </div>
-          </div>
-          <div className="left2">
+            >
+              +
+            </Button>
             {
-              flag&&<div>
-              {
-                child.map((data)=>{
-                  let childId = data.chapterId;
-                  let childName = data.chapterName;
-                  return(
-                    <div 
-                      className = "childChapBox"
-                      onClick={()=>{this._showArticle(childId)}}
-                    >
-                      <div className='childItem'>
-                        <span>{childId}</span>
-                        <span>{childName}</span>
-                        <Button  amSize="xs" onClick={()=>{this._deletechild(child,data)}}>删除</Button>
-                        <input
-                          type="text"
-                          onChange={()=>{this._childChange()}}
-                        />
-                      </div>
+              chapterDatas.map((data)=>{
+                let key = chapterDatas.indexOf(data);
+                let id = data.chapterId;
+                let name = data.chapterName;
+                let text = data.chapterSum;
+                return(
+                  <div 
+                    className="chapBox"
+                    onClick={()=>{this._showChid(e,data,key)}}
+                  >
+                    <div className="chapItem">
+                      <span>Chapterid:{id} </span>
+                      <div>章节名: {name}</div>
+                      <div>章节简介: {text}{data.mirror?"副本":null}</div>
+                      <Button amSize="xs" className="setting">编辑</Button>
+                      <span className="editChapP">
+                          <Button  amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
+                          <Button  amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
+                          <Button  amSize="xs" onClick={()=>{this._createChild(data)}}>创建子章节</Button>
+                          <Input 
+                            className="inputChap"
+                            radius 
+                            placeholder="输入章节名"
+                            onChange={()=>{this._onChange(data)}}
+                          />
+                      </span>
                     </div>
-                  );
-                })
-              }
-              </div>
+                  </div>
+                );
+              })
             }
           </div>
-          <div className="center">
-            <div className="inner">center</div>
-          </div>
-          <div className="right">right</div>
         </div>
-        <div className="footer">bottom</div>
+        <div className="left2">
+          {
+            flag&&<div>
+            {
+              child.map((data)=>{
+                let childId = data.chapterId;
+                let childName = data.chapterName;
+                return(
+                  <div 
+                    className = "childChapBox"
+                    onClick={()=>{this._showArticle(childId)}}
+                  >
+                    <div className='childItem'>
+                      <span>{childId}</span>
+                      <span>{childName}</span>
+                      <Button  amSize="xs" onClick={()=>{this._deletechild(child,data)}}>删除</Button>
+                      <input
+                        type="text"
+                        onChange={()=>{this._childChange()}}
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            }
+            </div>
+          }
+        </div>
       </div>
     );
   }
@@ -256,14 +249,16 @@ class AppComponent extends React.Component {
 
   render() {
     return (
-      <section className="workplace" ref="workplace">
-        <section className="controllnav">
-            <ChapIndexs/>
+      <section className="parent">
+        <section className="header">top</section>
+        <section className="main">
+          <ChapIndexs/>
+          <div className="center">
+            <div className="inner">center</div>
+          </div>
+          <div className="right">right</div>
         </section>
-        <section className="editplace">
-        </section>
-        <section className="tipbar">
-        </section>
+        <section className="footer">bottom</section>
       </section>
     );
   }

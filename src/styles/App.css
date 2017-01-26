@@ -28,6 +28,12 @@ html,body{
   flex:1;
   display:flex;
 }
+
+.chapIndex{
+  display: flex;
+  width: 280px;
+  background: #555;
+}
 /*主章节部分*/
 .left1{
   width:150px;
@@ -45,7 +51,10 @@ html,body{
   .chapBox{
     background: #ee735c;
   }
-
+  .delBtn{
+    position: absolute;
+    top: 0
+  }
   .inputChap{
     display: none;
   }
