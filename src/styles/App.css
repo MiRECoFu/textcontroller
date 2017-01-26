@@ -1,97 +1,81 @@
+*{
+  box-sizing:content-box;
+  margin:0;
+  padding:0;
+}
 html,body{
   width: 100%;
   height: 100%;
   background-color: #ededed;
 }
-.content{
-  width: 100%;
-  height: 100%;
+/*全局*/
+.parent{
+  display: flex;
+  flex-direction: column;
 }
-.workplace{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
+/*头部*/
+.header{
+  height:10%;
+  background: #aaa;
 }
-.controllnav{
-  width: 24%;
-  height: 100%;
-  float: left;
-  position: relative;
-  overflow-x: visible;
+/*尾部*/
+.bottom{
+  height:5%;
+  background: #aaa;
 }
-.sumchap{
-  overflow: visible;
+/*中间主体*/
+.main{
+  flex:1;
+  display:flex;
 }
-.chaps{
-  width: 50%;
-  height: 100%;
-  background-color: #555;
-  position: absolute;
-  overflow-y: scroll;
-  overflow-x: visible;
+/*主章节部分*/
+.left1{
+  width:150px;
+  background: #555;
 }
-.chaps::-webkit-scrollbar{
-  display: none;
+  .fatherChap{
+  }
+  .newChap{
+    width: 60px;
+    height: 40px;
+    margin-left: 28px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .chapBox{
+    background: #ee735c;
+  }
+
+  .inputChap{
+    display: none;
+  }
+
+/*子章节部分*/
+.left2{
+  width:130px;
+  background: #777;
 }
-.child{
-  display: block;
+  .childChapBox{
+    width: 100%;
+    background: #ee735c;
+  }
+
+
+/*富文本部分*/
+.center{
+  flex: 1;
+  overflow: auto;
+  background:pink;
 }
-.childn{
-  display: none;
+  .center .inner{
+    min-height: 1000px;
+  }
+/*Tip 部分*/
+.right{
+  width: 200px;
+  background: #777;
 }
-.newchap{
-  width: 50%;
-  height: 60px;
-  margin-left: 25%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  top: 20px;
-}
-.newchild-chap{
-  width: 50%;
-  height: 60px;
-  margin-left: 25%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  top: 20px;
-  background-color: #fff;
-}
-.chap{
-  width: 100%;
-  height: 160px;
-  background-color: #fa8072;
-  border-bottom: #f43e4b solid;
-  position: relative;
-}
-/*.chap:hover{
-  width: 100%;
-  height: 120px;
-  background-color: #f43e4b;
-  border-bottom: #fa8072 solid;
-  position: relative;
-}*/
-.subchap{
-  width: 100%;
-  height: 120px;
-  background-color: #c6e2ff;
-  border-bottom: #b2dfee solid;
-  position: relative;
-}
-/*.subchap:hover{
-  width: 100%;
-  height: 120px;
-  background-color: #b2dfee;
-  border-bottom: #c6e2ff solid;
-  position: relative;
-}*/
-.childblock{
-  width: 100%;
-  height: 120px;
-  background-color: #b4eeb4;
-  border-bottom: #b2dfee solid;
-  position: relative;
-}
-.inputChap{
-  display: none;
-}
+
+
+
+
