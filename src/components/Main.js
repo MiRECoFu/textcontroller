@@ -79,7 +79,10 @@ class ChapIndexs extends React.Component {
     this.setState({
       count
     })
+    let parent = chapterDatas[this.state.key];
 
+
+    child = [];
     chapterDatas.splice(chapterDatas.indexOf(obj), 1);
   }
 
@@ -108,54 +111,20 @@ class ChapIndexs extends React.Component {
   //  obj.preventDefault();
   }
 
-  _showChid(key) {
-    child = [];
+  _showChid(key,e) {
     this.setState({
       key: key,
       chidvisible: true
     });
-    let parent = chapterDatas[this.state.key];
+    let parent = chapterDatas[key];
 
     child = parent.childChap;
+    console.log(child[0].chapterName);
+    e.stopPropagation();
+    e.preventDefault();
   }
 
-/*
-  //创建子章节
-  _createChild(obj) {
-    let data = obj.childChap;
 
-  }
-*/
-
-  // //删除子章节
-  // _deletechild(arr, item) {
-  //   let ccount = arr.length;
-  //   ccount--;
-  //   this.setState({
-  //     childCont: ccount
-  //   })
-  //   arr.splice(arr.indexOf(item), 1);
-  // }
-
-
-  // //修改章节名
-  // _onChange(key) {
-  //   chapterDatas[key].chapterName = this.refs['cNameValue' + key].value;
-
-  //   this.setState({
-  //     nameChange: true
-  //   });
-  // }
-
-
-  // //修改子章节名
-  // _childChange(arr, kk, key) {
-  //     arr[kk].childName = this.refs['cdNameValue' + kk + key].value;
-
-  //     this.setState({
-  //       childNameChange: true
-  //     });
-  //   }
 
   _showArticle() {
 
@@ -195,7 +164,7 @@ class ChapIndexs extends React.Component {
                   return(
                     <div
                       className="chapBox"
-                      onClick={()=>{this._showChid(key)}}
+                      onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
                         <span>Chapterid:{id} </span>

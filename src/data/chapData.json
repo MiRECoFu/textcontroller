@@ -8,7 +8,7 @@
     "childChap": [{
       "mirror": false,
       "chapterId": "",
-      "chapterName": "子章节vv"
+      "chapterName": "chapter1的子章节"
     }, {
       "mirror": false,
       "chapterId": "",
@@ -23,7 +23,7 @@
     "childChap": [{
       "mirror": false,
       "chapterId": "",
-      "chapterName": "子章节aaa"
+      "chapterName": "chapter2的子章节aaa"
     }, {
       "mirror": false,
       "chapterId": "",
