@@ -43,10 +43,11 @@ class ChapIndexs extends React.Component {
     super(props);
     this.state = {
       count: 0,
+      mainindex: chapterDatas.length+1,
       chidvisible: false,
       key: 0,
       namevaluechange:false,
-      childcount:0
+      childcount: 0
     };
   }
 
@@ -58,12 +59,15 @@ class ChapIndexs extends React.Component {
     time += date.getTime().toString().substr(11);
     let count = this.state.count;
     count++;
+    let main = this.state.mainindex + 1;
     this.setState({
-      count
+      count: count,
+      mainindex: main
     })
     let nextChap = {
+      mainIndex: this.state.mainindex,
       chapterId: time.substr(4),
-      chapterName: count,
+      chapterName: '请点击编辑命名',
       mirror: false,
       chapterSum: '',
       childChap: []
@@ -76,10 +80,18 @@ class ChapIndexs extends React.Component {
 
   //点击删除某一章节节点信息
   _delete(obj) {
+    let main;
     let count = this.state.count;
     count--;
+    if(!obj.mirror){
+       main = this.state.mainindex;
+      main--;
+    }else{
+       main = this.state.mainindex;
+    }
     this.setState({
-      count,
+      count: count,
+      mainindex: main,
       childcount: 0
     })
 
@@ -95,13 +107,16 @@ class ChapIndexs extends React.Component {
     time += date.getTime().toString().substr(11);
     let count = this.state.count;
     count++;
+    let scount = this.state.subindex;
+    scount++;
     this.setState({
-      count
+      count: count
     })
 
     let nextChap = {
+      mainIndex: obj.mainIndex,
       chapterId: time.substr(4),
-      chapterName: count,
+      chapterName: '请点击编辑命名',
       mirror: true,
       chapterSum: '',
       childChap: []
@@ -184,6 +199,7 @@ class ChapIndexs extends React.Component {
                 chapterDatas.map((data)=>{
                   let key = chapterDatas.indexOf(data);
                   let id = data.chapterId;
+                  let index = data.mainIndex;
                   let name = data.chapterName;
                   let text = data.chapterSum;
                   return(
@@ -192,7 +208,7 @@ class ChapIndexs extends React.Component {
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
-                        <span>Chapterid:{id} </span>
+                        <span>Chapterid:{index} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <Button amSize="xs" className="setting">编辑</Button>
