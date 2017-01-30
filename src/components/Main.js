@@ -45,8 +45,8 @@ class ChapIndexs extends React.Component {
       count: 0,
       chidvisible: false,
       key: 0,
-      namevaluechange:false,
-      childcount:0
+      namevaluechange: false,
+      childcount: 0
     };
   }
 
@@ -110,7 +110,7 @@ class ChapIndexs extends React.Component {
     chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, nextChap);
   }
 
-  _showChid(key,e) {
+  _showChid(key, e) {
     let parent = chapterDatas[key];
 
     child = parent.childChap;
@@ -124,16 +124,21 @@ class ChapIndexs extends React.Component {
     e.preventDefault();
   }
 
+  _showInputChap(key) {
+    let obj = this.refs['inputChap' + key];
+    obj.style.display = 'block';
+  }
+
   //编辑章节名
-  _settingName(key){
-    chapterDatas[key].chapterName = this.refs['inputChap'+key].value;
+  _settingName(key) {
+    chapterDatas[key].chapterName = this.refs['inputChap' + key].value;
     this.setState({
-      namevaluechange:true
+      namevaluechange: true
     });
   }
 
   //创建新的子章节
-  _newchild(){
+  _newchild() {
     console.log(child[0].chapterName);
     console.log(chapterDatas[this.state.key].childChap);
 
@@ -151,12 +156,12 @@ class ChapIndexs extends React.Component {
 
 
   //删除子章节
-  _deletechild(child,data){
+  _deletechild(child, data) {
     this.setState({
       chidvisible: true,
-      childcount:child.length-1
+      childcount: child.length - 1
     })
-    child.splice(child.indexOf(data),1);
+    child.splice(child.indexOf(data), 1);
   }
 
   _showArticle() {
@@ -194,7 +199,7 @@ class ChapIndexs extends React.Component {
                         <span>Chapterid:{id} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
-                        <Button amSize="xs" className="setting">编辑</Button>
+                        <Button amSize="xs" className="setting" onClick={()=>{this._showInputChap(key)}}>编辑</Button>
                         <span className="editChapP">
                             <Button  amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
                             <Button  amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>

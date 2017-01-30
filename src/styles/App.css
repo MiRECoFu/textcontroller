@@ -58,8 +58,10 @@ html,body{
     top: 0
   }
   .inputChap{
+    position: absolute;
+    top: 21px;
     width: 246px;
-    display: block;
+    display: none;
   }
 
 /*子章节部分*/
