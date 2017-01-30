@@ -10,7 +10,7 @@ import {
 
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
-var Input = AMUIReact.Input;
+//var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
@@ -44,7 +44,8 @@ class ChapIndexs extends React.Component {
     this.state = {
       count: 0,
       chidvisible: false,
-      key: 0
+      key: 0,
+      namevaluechange:false
     };
   }
 
@@ -79,7 +80,6 @@ class ChapIndexs extends React.Component {
     this.setState({
       count
     })
-    let parent = chapterDatas[this.state.key];
 
 
     child = [];
@@ -105,10 +105,7 @@ class ChapIndexs extends React.Component {
       childChap: []
     };
 
-    // chapterDatas.push(nextChap);
     chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, nextChap);
-    //obj.stopPropagation();
-  //  obj.preventDefault();
   }
 
   _showChid(key,e) {
@@ -124,21 +121,34 @@ class ChapIndexs extends React.Component {
     e.preventDefault();
   }
 
+  //编辑章节名
+  _settingName(key){
+    chapterDatas[key].chapterName = this.refs['inputChap'+key].value;
+    this.setState({
+      namevaluechange:true
+    });
+  }
 
+  //创建新的子章节
+  _newchild(){
+    console.log(child[0].chapterName);
+    console.log(chapterDatas[this.state.key].childChap);
+
+    child.push({
+      mirror: false,
+      chapterId: '',
+      chapterName: ''
+    });
+    chapterDatas[this.state.key].childChap = child;
+    this.setState({
+      chidvisible: true
+    });
+  }
 
   _showArticle() {
 
   }
-  render() {/*
-    var flag = this.state.chidvisible;
-    let parentObj;
-    let child;
-    if (flag) {
-      parentObj = chapterDatas.splice(this.state.key, 1);
-      child = parentObj[0].childChap;
-      console.log(child);
-    }*/
-
+  render() {
 
 
     return (
@@ -174,11 +184,12 @@ class ChapIndexs extends React.Component {
                         <span className="editChapP">
                             <Button  amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
                             <Button  amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
-                            <Input
+                            <input
                               className="inputChap"
-                              radius
+                              ref={'inputChap'+key}
                               placeholder="输入章节名"
-                              onChange={()=>{this._onChange(data)}}
+                              type="text"
+                              onChange={()=>{this._settingName(key)}}
                             />
                         </span>
                       </div>
@@ -190,6 +201,7 @@ class ChapIndexs extends React.Component {
             </div>
           </div>
           <div className="left2">
+          <Button className="newchild" onClick={()=>this._newchild()}>创建新的子章节   </Button>
             {
 
                 child.map((data)=>{

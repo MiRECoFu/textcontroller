@@ -31,12 +31,12 @@ html,body{
 
 .chapIndex{
   display: flex;
-  width: 280px;
+  width: 480px;
   background: #555;
 }
 /*主章节部分*/
 .left1{
-  width:150px;
+  width:250px;
   background: #555;
 }
   .fatherChap{
@@ -51,20 +51,26 @@ html,body{
   .chapBox{
     background: #ee735c;
     position: relative;
+    overflow: hidden;
   }
   .delBtn{
     position: absolute;
     top: 0
   }
   .inputChap{
-    display: none;
+    width: 246px;
+    display: block;
   }
 
 /*子章节部分*/
 .left2{
-  width:130px;
+  width:230px;
   background: #777;
 }
+  .newchild{
+    width: 100%;
+
+  }
   .childChapBox{
     width: 100%;
     background: #ee735c;
@@ -83,6 +89,6 @@ html,body{
   }
 /*Tip 部分*/
 .right{
-  width: 200px;
+  width: 300px;
   background: #777;
 }
