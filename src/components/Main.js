@@ -107,8 +107,6 @@ class ChapIndexs extends React.Component {
     time += date.getTime().toString().substr(11);
     let count = this.state.count;
     count++;
-    let scount = this.state.subindex;
-    scount++;
     this.setState({
       count: count
     })
@@ -198,7 +196,6 @@ class ChapIndexs extends React.Component {
               {
                 chapterDatas.map((data)=>{
                   let key = chapterDatas.indexOf(data);
-                  let id = data.chapterId;
                   let index = data.mainIndex;
                   let name = data.chapterName;
                   let text = data.chapterSum;
@@ -273,6 +270,15 @@ class ChapIndexs extends React.Component {
 class Chaptree extends React.Component {
 
   render() {
+    let mainChap = [];
+    let lastindex = chapterDatas[chapterDatas.length-1].mainIndex;
+    chapterDatas.forEach((item,index) => {
+
+      if(!item.mirror){
+        mainChap.push(item);
+      }
+    });
+
     return (
       <div className="tree">
         <Button amSize='lg'>查看我的所有章节结构</Button>
@@ -288,14 +294,6 @@ class Chaptree extends React.Component {
 class AppComponent extends React.Component {
 
   render() {
-    let mainChap = [];
-    chapterDatas.forEach((item,index) => {
-
-      if(!item.mirror){
-        mainChap.push(item);
-      }
-    });
-
     return (
       <section className="workplace" ref="workplace">
         <section className="controllnav">
