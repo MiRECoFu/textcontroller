@@ -114,7 +114,7 @@ class ChapIndexs extends React.Component {
     let parent = chapterDatas[key];
 
     child = parent.childChap;
-    console.log(child[0].chapterName);
+    //console.log(child[0].chapterName);
     this.setState({
       key: key,
       chidvisible: true,
@@ -134,8 +134,8 @@ class ChapIndexs extends React.Component {
 
   //创建新的子章节
   _newchild(){
-    console.log(child[0].chapterName);
-    console.log(chapterDatas[this.state.key].childChap);
+    //console.log(child[0].chapterName);
+    //console.log(chapterDatas[this.state.key].childChap);
 
     child.push({
       mirror: false,
@@ -157,6 +157,7 @@ class ChapIndexs extends React.Component {
       childcount:child.length-1
     })
     child.splice(child.indexOf(data),1);
+    chapterDatas[this.state.key].childChap = child;
   }
 
   _showArticle() {
@@ -251,12 +252,33 @@ class ChapIndexs extends React.Component {
     );
   }
 }
+/*
+class Chaptree extends React.Component {
 
+  render() {
+    return (
+      <div className="tree">
+        <Button amSize='lg'>查看我的所有章节结构</Button>
+        <div className="chap-tree">
 
+        </div>
+      </div>
+    );
+  }
+}
+*/
 
 class AppComponent extends React.Component {
 
   render() {
+    let mainChap = [];
+    chapterDatas.forEach((item,index) => {
+
+      if(!item.mirror){
+        mainChap.push(item);
+      }
+    });
+
     return (
       <section className="workplace" ref="workplace">
         <section className="controllnav">

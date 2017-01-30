@@ -69,7 +69,6 @@ html,body{
 }
   .newchild{
     width: 100%;
-
   }
   .childChapBox{
     width: 100%;
@@ -91,4 +90,13 @@ html,body{
 .right{
   width: 300px;
   background: #777;
+}
+
+
+/*树状图部分*/
+.tree{
+  width: 90%;
+  height:900px;
+  background-color: #fff;
+  z-index: 111;
 }
