@@ -45,7 +45,8 @@ class ChapIndexs extends React.Component {
       count: 0,
       chidvisible: false,
       key: 0,
-      namevaluechange:false
+      namevaluechange:false,
+      childcount:0
     };
   }
 
@@ -78,7 +79,8 @@ class ChapIndexs extends React.Component {
     let count = this.state.count;
     count--;
     this.setState({
-      count
+      count,
+      childcount: 0
     })
 
 
@@ -109,14 +111,15 @@ class ChapIndexs extends React.Component {
   }
 
   _showChid(key,e) {
-    this.setState({
-      key: key,
-      chidvisible: true
-    });
     let parent = chapterDatas[key];
 
     child = parent.childChap;
     console.log(child[0].chapterName);
+    this.setState({
+      key: key,
+      chidvisible: true,
+      childcount: child.length
+    });
     e.stopPropagation();
     e.preventDefault();
   }
@@ -137,12 +140,23 @@ class ChapIndexs extends React.Component {
     child.push({
       mirror: false,
       chapterId: '',
-      chapterName: ''
+      chapterName: '子章节'
     });
     chapterDatas[this.state.key].childChap = child;
     this.setState({
-      chidvisible: true
+      chidvisible: true,
+      childcount: child.length
     });
+  }
+
+
+  //删除子章节
+  _deletechild(child,data){
+    this.setState({
+      chidvisible: true,
+      childcount:child.length-1
+    })
+    child.splice(child.indexOf(data),1);
   }
 
   _showArticle() {
