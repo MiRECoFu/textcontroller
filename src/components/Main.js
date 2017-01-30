@@ -243,6 +243,7 @@ class ChapIndexs extends React.Component {
             }
           </div>
           <div className="center">
+            <Chaptree/>
             <div className="inner">center</div>
           </div>
           <div className="right">right</div>
@@ -252,7 +253,7 @@ class ChapIndexs extends React.Component {
     );
   }
 }
-/*
+
 class Chaptree extends React.Component {
 
   render() {
@@ -266,7 +267,7 @@ class Chaptree extends React.Component {
     );
   }
 }
-*/
+
 
 class AppComponent extends React.Component {
 
