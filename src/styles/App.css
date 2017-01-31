@@ -36,7 +36,7 @@ html,body{
 }
 /*主章节部分*/
 .left1{
-  width:250px;
+  width:200px;
   background: #555;
 }
   .fatherChap{
@@ -71,11 +71,22 @@ html,body{
 }
   .newchild{
     width: 100%;
+    height: 23px;
+    text-align: center;
   }
   .childChapBox{
     width: 100%;
     background: #ee735c;
     display: block;
+  }
+  .childItem{
+    position: relative;
+  }
+  .inputChild{
+    position: absolute;
+    top: 0;
+    width: 90%;
+    display: none;
   }
 
 
@@ -97,7 +108,7 @@ html,body{
 
 /*树状图部分*/
 .tree{
-  width: 90%;
+  width: 100%;
   height:900px;
   background-color: #fff;
   z-index: 111;

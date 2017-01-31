@@ -9,14 +9,14 @@
     "childChap": [{
       "mirror": false,
       "chapterId": "",
-      "chapterName": "chapter1的子章节"
+      "chapterName": "子章节1a"
     }, {
       "mirror": false,
       "chapterId": "",
       "chapterName": "子章节2"
     }]
 
-  },{
+  }, {
     "mainIndex": 2,
     "chapterId": "id0",
     "chapterName": "哈哈哈",
@@ -25,11 +25,11 @@
     "childChap": [{
       "mirror": false,
       "chapterId": "",
-      "chapterName": "chapter2的子章节aaa"
+      "chapterName": "子章节1b"
     }, {
       "mirror": false,
       "chapterId": "",
       "chapterName": "子章节2"
     }]
-    }]
+  }]
 }

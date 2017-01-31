@@ -43,12 +43,16 @@ class ChapIndexs extends React.Component {
     super(props);
     this.state = {
       count: 0,
-      mainindex: chapterDatas.length+1,
+      mainindex: chapterDatas.length + 1,
       chidvisible: false,
       key: 0,
-      namevaluechange:false,
+      namevaluechange: false,
       childcount: 0
     };
+  }
+
+  componentWillMount() {
+    child = chapterDatas[0].childChap;
   }
 
   //点击为chapterDatas数组添加新的一组章节数据项
@@ -83,11 +87,11 @@ class ChapIndexs extends React.Component {
     let main;
     let count = this.state.count;
     count--;
-    if(!obj.mirror){
-       main = this.state.mainindex;
+    if (!obj.mirror) {
+      main = this.state.mainindex;
       main--;
-    }else{
-       main = this.state.mainindex;
+    } else {
+      main = this.state.mainindex;
     }
     this.setState({
       count: count,
@@ -123,7 +127,7 @@ class ChapIndexs extends React.Component {
     chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, nextChap);
   }
 
-  _showChid(key,e) {
+  _showChid(key, e) {
     let parent = chapterDatas[key];
 
     child = parent.childChap;
@@ -137,18 +141,37 @@ class ChapIndexs extends React.Component {
     e.preventDefault();
   }
 
+  // 显示编辑区域
+  _showInputChap(key) {
+    let obj = this.refs['inputChap' + key];
+    obj.style.display = 'block';
+  }
+
+  // 点击全选文本
+  _select(key) {
+    let obj = this.refs['inputChap' + key];
+    obj.select();
+  }
+
   //编辑章节名
-  _settingName(key){
-    chapterDatas[key].chapterName = this.refs['inputChap'+key].value;
+  _settingName(key) {
+    chapterDatas[key].chapterName = this.refs['inputChap' + key].value;
     this.setState({
-      namevaluechange:true
+      namevaluechange: true
     });
   }
 
+  // 隐藏编辑区域
+  _hide(e, key) {
+    let obj = this.refs['inputChap' + key];
+    if (e && e.keyCode == 13) { // enter 键
+      // alert('enter')
+      obj.style.display = 'none';
+    }
+  }
+
   //创建新的子章节
-  _newchild(){
-    //console.log(child[0].chapterName);
-    //console.log(chapterDatas[this.state.key].childChap);
+  _newchild() {
 
     child.push({
       mirror: false,
@@ -162,20 +185,55 @@ class ChapIndexs extends React.Component {
     });
   }
 
-
   //删除子章节
-  _deletechild(child,data){
+  _deletechild(child, key) {
     this.setState({
       chidvisible: true,
-      childcount:child.length-1
+      childcount: child.length - 1
     })
-    child.splice(child.indexOf(data),1);
+    child.splice(key, 1);
     chapterDatas[this.state.key].childChap = child;
   }
 
-  _showArticle() {
-
+  //显示子章节文本输入框
+  _showInputChild(key) {
+      let obj = this.refs['inputChild' + key];
+      obj.style.display = 'block';
+    }
+    // 编辑子章节名
+  _settingChildName(child, key) {
+      child[key].chapterName = this.refs['inputChild' + key].value;
+      this.setState({
+        namevaluechange: true
+      });
+    }
+    // 隐藏子章节文本输入框
+  _hideChild(e, key) {
+    let obj = this.refs['inputChild' + key];
+    if (e && e.keyCode == 13) { // enter 键
+      // alert('enter')
+      obj.style.display = 'none';
+    }
   }
+
+  _createChildBre(child, key) {
+    let date = new Date();
+    let time = date.getFullYear().toString() + (date.getMonth() + 1).toString() + date.getDate();
+    time += date.getTime().toString().substr(11);
+
+    let nextChap = {
+      mirror: true,
+      chapterId: time.substr(4),
+      chapterName: '请点击编辑命名',
+    };
+    this.setState({
+      childcount: child.length + 1
+    });
+    child.splice(key + 1, 0, nextChap);
+    console.log(child)
+    chapterDatas[this.state.key].childChap = child;
+  }
+
   render() {
 
 
@@ -208,17 +266,19 @@ class ChapIndexs extends React.Component {
                         <span>章节:{index} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
-                        <Button amSize="xs" className="setting">编辑</Button>
                         <span className="editChapP">
-                            <Button  amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
-                            <Button  amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
-                            <input
-                              className="inputChap"
-                              ref={'inputChap'+key}
-                              placeholder="输入章节名"
-                              type="text"
-                              onChange={()=>{this._settingName(key)}}
-                            />
+                          <Button amSize="xs" onClick={()=>{this._showInputChap(key)}}>编辑</Button>
+                          <Button amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
+                          <Button amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
+                          <input
+                            className="inputChap"
+                            ref={'inputChap'+key}
+                            placeholder="输入章节名"
+                            type="text"
+                            onChange={()=>{this._settingName(key)}}
+                            onKeyDown={(e)=>{this._hide(e,key)}} 
+                            onFocus={()=>{this._select(key)}}
+                          />
                         </span>
                       </div>
 
@@ -229,24 +289,33 @@ class ChapIndexs extends React.Component {
             </div>
           </div>
           <div className="left2">
-          <Button className="newchild" onClick={()=>this._newchild()}>创建新的子章节   </Button>
+            <Button className="newchild" onClick={()=>this._newchild()}>创建新的子章节   </Button>
             {
 
                 child.map((data)=>{
+                  let key = child.indexOf(data);
                   let childId = data.chapterId;
                   let childName = data.chapterName;
+
                   return(
                     <div
                       className = "childChapBox"
-                      onClick={()=>{this._showArticle(childId)}}
+                      
                     >
                       <div className='childItem'>
                         <span>{childId}</span>
                         <span>{childName}</span>
-                        <Button  amSize="xs" onClick={()=>{this._deletechild(child,data)}}>删除</Button>
+                        <br />
+                        <Button amSize="xs" onClick={()=>{this._showInputChild(key)}}>编辑</Button>
+                        <Button amSize="xs" onClick={()=>{this._deletechild(child,key)}}>删除</Button>
+                        <Button amSize="xs" onClick={()=>{this._createChildBre(child,key)}}>创建副本</Button>
                         <input
+                          className="inputChild"
+                          ref={'inputChild'+key}
                           type="text"
-                          onChange={()=>{this._childChange()}}
+                          placeholder="输入子章节名"
+                          onChange={()=>{this._settingChildName(child,key)}}
+                          onKeyDown={(e)=>{this._hideChild(e,key)}} 
                         />
                       </div>
                     </div>
@@ -271,22 +340,22 @@ class Chaptree extends React.Component {
 
   render() {
     //let mainChap = [];
-    let lastindex = chapterDatas[chapterDatas.length-1].mainIndex;
+    let lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
     let subChap = [];
-    console.log(lastindex);
+    // console.log(lastindex);
 
     //将mainIndex相同的章节放在一个数组中
-    for(let i=1;i<=lastindex;i++){
-      subChap[i-1]=[];
-      for(let j=0;j<chapterDatas.length;j++){
-        if(chapterDatas[j].mainIndex == i){
-          subChap[i-1].push(chapterDatas[j]);
+    for (let i = 1; i <= lastindex; i++) {
+      subChap[i - 1] = [];
+      for (let j = 0; j < chapterDatas.length; j++) {
+        if (chapterDatas[j].mainIndex == i) {
+          subChap[i - 1].push(chapterDatas[j]);
         }
       }
     }
 
 
-    console.log(subChap[0]);
+    // console.log(subChap[0]);
     return (
       <div className="tree">
         <Button amSize='lg'>查看我的所有章节结构</Button>
