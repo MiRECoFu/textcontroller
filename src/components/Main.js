@@ -205,7 +205,7 @@ class ChapIndexs extends React.Component {
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
-                        <span>Chapterid:{index} </span>
+                        <span>章节:{index} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <Button amSize="xs" className="setting">编辑</Button>
@@ -270,20 +270,45 @@ class ChapIndexs extends React.Component {
 class Chaptree extends React.Component {
 
   render() {
-    let mainChap = [];
+    //let mainChap = [];
     let lastindex = chapterDatas[chapterDatas.length-1].mainIndex;
-    chapterDatas.forEach((item,index) => {
+    let subChap = [];
+    console.log(lastindex);
 
-      if(!item.mirror){
-        mainChap.push(item);
+    //将mainIndex相同的章节放在一个数组中
+    for(let i=1;i<=lastindex;i++){
+      subChap[i-1]=[];
+      for(let j=0;j<chapterDatas.length;j++){
+        if(chapterDatas[j].mainIndex == i){
+          subChap[i-1].push(chapterDatas[j]);
+        }
       }
-    });
+    }
 
+
+    console.log(subChap[0]);
     return (
       <div className="tree">
         <Button amSize='lg'>查看我的所有章节结构</Button>
         <div className="chap-tree">
-
+          {
+            subChap.map((data) => {
+              let key = subChap.indexOf(data);
+              return(
+                <div className='chapLine' key={key}>
+                  {
+                    data.map((d) => {
+                      let k = data.indexOf(d);
+                      return(
+                        <div className='chapRow'>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              );
+            })
+          }
         </div>
       </div>
     );
