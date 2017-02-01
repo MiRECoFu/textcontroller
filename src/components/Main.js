@@ -263,7 +263,7 @@ class ChapIndexs extends React.Component {
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
-                        <span>章节:{index} </span>
+                        <span>章节:{key+1} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <span className="editChapP">
@@ -339,11 +339,14 @@ class ChapIndexs extends React.Component {
 class Chaptree extends React.Component {
 
   render() {
-    //let mainChap = [];
-    let lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
+    //取到一共有多少个主章节
+    let lastindex;
+    if(chapterDatas.length==0){
+      lastindex = 0;
+    } else {
+      lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
+    }
     let subChap = [];
-    // console.log(lastindex);
-
     //将mainIndex相同的章节放在一个数组中
     for (let i = 1; i <= lastindex; i++) {
       subChap[i - 1] = [];
