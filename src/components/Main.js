@@ -276,7 +276,7 @@ class ChapIndexs extends React.Component {
                             placeholder="输入章节名"
                             type="text"
                             onChange={()=>{this._settingName(key)}}
-                            onKeyDown={(e)=>{this._hide(e,key)}} 
+                            onKeyDown={(e)=>{this._hide(e,key)}}
                             onFocus={()=>{this._select(key)}}
                           />
                         </span>
@@ -300,7 +300,7 @@ class ChapIndexs extends React.Component {
                   return(
                     <div
                       className = "childChapBox"
-                      
+
                     >
                       <div className='childItem'>
                         <span>{childId}</span>
@@ -315,7 +315,7 @@ class ChapIndexs extends React.Component {
                           type="text"
                           placeholder="输入子章节名"
                           onChange={()=>{this._settingChildName(child,key)}}
-                          onKeyDown={(e)=>{this._hideChild(e,key)}} 
+                          onKeyDown={(e)=>{this._hideChild(e,key)}}
                         />
                       </div>
                     </div>
@@ -367,9 +367,18 @@ class Chaptree extends React.Component {
                 <div className='chapLine' key={key}>
                   {
                     data.map((d) => {
-                      let k = data.indexOf(d);
+                      let childtree = d.childChap;
+
                       return(
                         <div className='chapRow'>
+                          {
+                            childtree.map((childdata) => {
+
+                              return(
+                                <div className='childRow'></div>
+                              )
+                            })
+                          }
                         </div>
                       );
                     })
