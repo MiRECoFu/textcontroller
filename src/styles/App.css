@@ -135,7 +135,7 @@ html,body{
 /*树状图部分*/
 .tree{
   width: 100%;
-  height:900px;
+  height:1000px;
   background-color: #fff;
   z-index: 111;
 }
