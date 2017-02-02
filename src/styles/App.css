@@ -94,11 +94,32 @@ html,body{
 .center{
   flex: 1;
   overflow: auto;
-  background:pink;
+  /*background:pink;*/
 }
   .center .inner{
     min-height: 1000px;
+    width: 97.2%;
   }
+  .markdownInput{
+    min-height: 100px; 
+  }
+/*  .markdown{
+    
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: black
+  }
+  .reactmd{
+    position: absolute;
+    top: 415px;
+    bottom: 0;
+    left: 0;
+    right: -17px; 
+    overflow-y: scroll;
+  }*/
+
 /*Tip 部分*/
 .right{
   width: 300px;

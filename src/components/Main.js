@@ -4,13 +4,15 @@ require('styles/App.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactMarkdown from 'react-markdown';
 import {
   BosClient
 } from 'bce-sdk-js';
 
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
-//var Input = AMUIReact.Input;
+var Form = AMUIReact.Form;
+var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 
 const config = {
@@ -138,10 +140,10 @@ class ChapIndexs extends React.Component {
     let parent = chapterDatas[key];
 
     child = parent.childChap;
-    if(parent == []){
+    if (parent == []) {
       child = [];
     }
-    if(chapDatas.length == 0) {
+    if (chapDatas.length == 0) {
       child = [];
     }
     //console.log(child[0].chapterName);
@@ -185,15 +187,15 @@ class ChapIndexs extends React.Component {
 
   //创建新的子章节
   _newchild() {
-    if(chapterDatas.length == 0) {
+    if (chapterDatas.length == 0) {
       child.push();
-    } else{
-          child.push({
-            mirror: false,
-            chapterId: '',
-            chapterName: '子章节'
-          });
-        }
+    } else {
+      child.push({
+        mirror: false,
+        chapterId: '',
+        chapterName: '子章节'
+      });
+    }
     chapterDatas[this.state.key].childChap = child;
     this.setState({
       chidvisible: true,
@@ -249,7 +251,7 @@ class ChapIndexs extends React.Component {
     console.log(child)
     chapterDatas[this.state.key].childChap = child;
   }
-  _showtree(){
+  _showtree() {
     let treebtn = this.refs['mask'];
     treebtn.style.display = 'block';
     let backbtn = this.refs['back'];
@@ -258,7 +260,7 @@ class ChapIndexs extends React.Component {
       treechange: true
     });
   }
-  _back(){
+  _back() {
     let treebtn = this.refs['mask'];
     treebtn.style.display = 'none';
     let backbtn = this.refs['back'];
@@ -287,9 +289,9 @@ class ChapIndexs extends React.Component {
       }
     }
 
-    subChap.forEach((item,index) => {
-      if(item.length == 0) {
-        subChap.splice(index,1);
+    subChap.forEach((item, index) => {
+      if (item.length == 0) {
+        subChap.splice(index, 1);
       }
     });
 
@@ -390,7 +392,9 @@ class ChapIndexs extends React.Component {
             }
           </div>
           <div className="center">
-            <div className="inner">center</div>
+            <div className="inner">
+              <MarkDown />
+            </div>
           </div>
           <div className="right">right</div>
         </div>
@@ -399,16 +403,53 @@ class ChapIndexs extends React.Component {
     );
   }
 }
-
-class Chaptree extends React.Component {
-/*
+class MarkDown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cancelMain: false
+      value: '',
     };
   }
-*/
+  _showMd() {
+    this.setState({
+      value: this.refs.field.getValue()
+    });
+  }
+  render() {
+    // var input = '# This is a header\n\nAnd this is a paragraph';
+    if (this.state.value) {
+      var input = this.state.value;
+    }
+
+    return (
+      <div>
+        <Form>
+          <Input 
+            className="markdownInput"
+            id="markdownInput"
+            type="textarea" 
+            label="文本域" 
+            placeholder="说点神马..."
+            ref="field" 
+            onChange={()=>{this._showMd()}}
+          />
+        </Form>
+        <div className="markdown">
+          <ReactMarkdown className="reactmd" source={input} />
+        </div>
+      </div>
+    );
+  }
+}
+class Chaptree extends React.Component {
+  /*
+    constructor(props) {
+      super(props);
+      this.state = {
+        cancelMain: false
+      };
+    }
+  */
   render() {
     let subChap = this.props.data;
     // console.log(subChap[0]);
