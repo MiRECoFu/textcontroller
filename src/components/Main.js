@@ -25,11 +25,10 @@ let bucket = 'my-bucket';
 let key = 'hello.js';
 let client = new BosClient(config);
 
-/*
+
   client.putObjectFromString(bucket, key, 'hello world')
     .then(response => console.log(response))    // 成功
     .catch(error => console.error(error));
-    */
 
 //拿到储存章节信息的json文件，转化为数组
 
