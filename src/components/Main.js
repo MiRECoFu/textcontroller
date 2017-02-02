@@ -138,6 +138,12 @@ class ChapIndexs extends React.Component {
     let parent = chapterDatas[key];
 
     child = parent.childChap;
+    if(parent == []){
+      child = [];
+    }
+    if(chapDatas.length == 0) {
+      child = [];
+    }
     //console.log(child[0].chapterName);
     this.setState({
       key: key,
@@ -179,12 +185,15 @@ class ChapIndexs extends React.Component {
 
   //创建新的子章节
   _newchild() {
-
-    child.push({
-      mirror: false,
-      chapterId: '',
-      chapterName: '子章节'
-    });
+    if(chapterDatas.length == 0) {
+      child.push();
+    } else{
+          child.push({
+            mirror: false,
+            chapterId: '',
+            chapterName: '子章节'
+          });
+        }
     chapterDatas[this.state.key].childChap = child;
     this.setState({
       chidvisible: true,
@@ -278,12 +287,11 @@ class ChapIndexs extends React.Component {
       }
     }
 
-    for (let v = 0; v < subChap.length; v++) {
-      if(subChap[v].length == 0){
-        subChap.splice(v,1);
+    subChap.forEach((item,index) => {
+      if(item.length == 0) {
+        subChap.splice(index,1);
       }
-    }
-
+    });
 
 
     return (
@@ -315,7 +323,7 @@ class ChapIndexs extends React.Component {
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
-                        <div>章节名: {name}</div>
+                        <div>{key+1}.章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <span className="editChapP">
                           <Button amSize="xs" onClick={()=>{this._showInputChap(key)}}>编辑</Button>
