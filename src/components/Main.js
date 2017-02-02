@@ -12,6 +12,7 @@ import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 //var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
+
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
   credentials: {
@@ -35,6 +36,12 @@ let client = new BosClient(config);
 let Datas = require('../data/chapData.json');
 let chapterDatas = Datas.data;
 let child = [];
+
+
+var Storage = require('../storage/storage.js');
+
+Storage.set('user', Datas)
+console.log(Storage.get('user'))
 
 
 //单个章节节点组件
@@ -341,7 +348,7 @@ class Chaptree extends React.Component {
   render() {
     //取到一共有多少个主章节
     let lastindex;
-    if(chapterDatas.length==0){
+    if (chapterDatas.length == 0) {
       lastindex = 0;
     } else {
       lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
