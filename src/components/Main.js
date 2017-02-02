@@ -36,7 +36,6 @@ let Datas = require('../data/chapData.json');
 let chapterDatas = Datas.data;
 let child = [];
 
-
 var Storage = require('../storage/storage.js');
 
 Storage.set('user', Datas)
@@ -53,7 +52,8 @@ class ChapIndexs extends React.Component {
       chidvisible: false,
       key: 0,
       namevaluechange: false,
-      childcount: 0
+      childcount: 0,
+      treechange: false
     };
   }
 
@@ -108,6 +108,7 @@ class ChapIndexs extends React.Component {
 
     child = [];
     chapterDatas.splice(chapterDatas.indexOf(obj), 1);
+
   }
 
   //创建副本
@@ -244,15 +245,45 @@ class ChapIndexs extends React.Component {
     treebtn.style.display = 'block';
     let backbtn = this.refs['back'];
     backbtn.style.display = 'block';
+    this.setState({
+      treechange: true
+    });
   }
   _back(){
     let treebtn = this.refs['mask'];
     treebtn.style.display = 'none';
     let backbtn = this.refs['back'];
     backbtn.style.display = 'none';
+    this.setState({
+      treechange: true
+    });
   }
 
   render() {
+    //取到一共有多少个主章节
+    let lastindex;
+    if (chapterDatas.length == 0) {
+      lastindex = 0;
+    } else {
+      lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
+    }
+    let subChap = [];
+    //将mainIndex相同的章节放在一个数组中
+    for (let i = 1; i <= lastindex; i++) {
+      subChap[i - 1] = [];
+      for (let j = 0; j < chapterDatas.length; j++) {
+        if (chapterDatas[j].mainIndex == i) {
+          subChap[i - 1].push(chapterDatas[j]);
+        }
+      }
+    }
+
+    for (let v = 0; v < subChap.length; v++) {
+      if(subChap[v].length == 0){
+        subChap.splice(v,1);
+      }
+    }
+
 
 
     return (
@@ -260,7 +291,7 @@ class ChapIndexs extends React.Component {
       <div className="header">top</div>
         <div className="main">
         <div className="mask" ref='mask'>
-          <Chaptree/>
+          <Chaptree data={subChap}/>
         </div>
           <div className="left1">
             <div className="fatherChap">
@@ -309,7 +340,7 @@ class ChapIndexs extends React.Component {
               <Button amSize='lg' className="treebtn" onClick = {
                this._showtree.bind(this)
               }>查看我的所有章节结构</Button>
-              <button amSize='lg' className="backbtn" ref="back" onClick = {
+              <button className="backbtn" ref="back" onClick = {
                this._back.bind(this)
              }>返回</button>
             </div>
@@ -371,23 +402,7 @@ class Chaptree extends React.Component {
   }
 */
   render() {
-    //取到一共有多少个主章节
-    let lastindex;
-    if (chapterDatas.length == 0) {
-      lastindex = 0;
-    } else {
-      lastindex = chapterDatas[chapterDatas.length - 1].mainIndex;
-    }
-    let subChap = [];
-    //将mainIndex相同的章节放在一个数组中
-    for (let i = 1; i <= lastindex; i++) {
-      subChap[i - 1] = [];
-      for (let j = 0; j < chapterDatas.length; j++) {
-        if (chapterDatas[j].mainIndex == i) {
-          subChap[i - 1].push(chapterDatas[j]);
-        }
-      }
-    }
+    let subChap = this.props.data;
     // console.log(subChap[0]);
     return (
       <div className="tree">
