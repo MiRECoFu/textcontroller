@@ -273,7 +273,7 @@ class ChapIndexs extends React.Component {
                           <input
                             className="inputChap"
                             ref={'inputChap'+key}
-                            placeholder="输入章节名"
+                            placeholder="输入章节名，按回车确定"
                             type="text"
                             onChange={()=>{this._settingName(key)}}
                             onKeyDown={(e)=>{this._hide(e,key)}}
@@ -313,7 +313,7 @@ class ChapIndexs extends React.Component {
                           className="inputChild"
                           ref={'inputChild'+key}
                           type="text"
-                          placeholder="输入子章节名"
+                          placeholder="输入子章节名，按回车确定"
                           onChange={()=>{this._settingChildName(child,key)}}
                           onKeyDown={(e)=>{this._hideChild(e,key)}}
                         />
