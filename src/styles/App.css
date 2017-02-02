@@ -100,25 +100,30 @@ html,body{
     min-height: 1000px;
     width: 97.2%;
   }
-  .markdownInput{
-    min-height: 100px; 
-  }
-/*  .markdown{
-    
-    height: 100%;
+  .inputField{
     width: 100%;
-    overflow: hidden;
-    position: relative;
-    background: black
+    height: 120px; 
+  }
+    .markdownInput{
+      min-height: 100px; 
+    }
+  .markdown{
+    max-height:800px; 
+    overflow:auto;
+  }
+  .markdown::-webkit-scrollbar {
+      display: none
+     /* 隐藏滚动条，但依旧具备可以滚动的功能 */
+
   }
   .reactmd{
-    position: absolute;
+    /*position: absolute;
     top: 415px;
     bottom: 0;
     left: 0;
     right: -17px; 
-    overflow-y: scroll;
-  }*/
+    overflow-y: scroll;*/
+  }
 
 /*Tip 部分*/
 .right{

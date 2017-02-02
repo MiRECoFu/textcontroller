@@ -412,7 +412,7 @@ class MarkDown extends React.Component {
   }
   _showMd() {
     this.setState({
-      value: this.refs.field.getValue()
+      value: this.refs.md.getValue()
     });
   }
   render() {
@@ -430,7 +430,7 @@ class MarkDown extends React.Component {
             type="textarea" 
             label="文本域" 
             placeholder="说点神马..."
-            ref="field" 
+            ref="md" 
             onChange={()=>{this._showMd()}}
           />
         </Form>
