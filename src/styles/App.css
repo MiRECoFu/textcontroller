@@ -125,6 +125,7 @@ html,body{
   height: 100px;
   background-color: #a33;
   margin-right: 5px;
+  margin-bottom: 10px;
   float: left;
 }
 .childRow{
@@ -133,4 +134,22 @@ html,body{
   background-color: #df2;
   margin-right: 3px;
   float: left;
+}
+.treebtn{
+  bottom: 15px;
+  position: fixed;
+  width: 165px;
+}
+.backbtn{
+  bottom: 15px;
+  left: 200px;
+  position: fixed;
+  z-index: 1111;
+  display: none;
+}
+.mask{
+  width: 430px;
+  position: fixed;
+  z-index: 111;
+  display: none;
 }

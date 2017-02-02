@@ -20,7 +20,7 @@ const config = {
     sk: '114576782dd448b89c8e4b2b2db551be' //您的SecretAccessKey
   }
 };
-
+/*
 let bucket = 'my-bucket';
 let key = 'hello.js';
 let client = new BosClient(config);
@@ -29,7 +29,7 @@ let client = new BosClient(config);
   client.putObjectFromString(bucket, key, 'hello world')
     .then(response => console.log(response))    // 成功
     .catch(error => console.error(error));
-
+*/
 //拿到储存章节信息的json文件，转化为数组
 
 let Datas = require('../data/chapData.json');
@@ -239,6 +239,18 @@ class ChapIndexs extends React.Component {
     console.log(child)
     chapterDatas[this.state.key].childChap = child;
   }
+  _showtree(){
+    let treebtn = this.refs['mask'];
+    treebtn.style.display = 'block';
+    let backbtn = this.refs['back'];
+    backbtn.style.display = 'block';
+  }
+  _back(){
+    let treebtn = this.refs['mask'];
+    treebtn.style.display = 'none';
+    let backbtn = this.refs['back'];
+    backbtn.style.display = 'none';
+  }
 
   render() {
 
@@ -247,6 +259,9 @@ class ChapIndexs extends React.Component {
       <div className="parent">
       <div className="header">top</div>
         <div className="main">
+        <div className="mask" ref='mask'>
+          <Chaptree/>
+        </div>
           <div className="left1">
             <div className="fatherChap">
               <Button
@@ -269,7 +284,6 @@ class ChapIndexs extends React.Component {
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >
-                        <span>章节:{key+1} </span>
                         <div>章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <span className="editChapP">
@@ -292,6 +306,12 @@ class ChapIndexs extends React.Component {
                   );
                 })
               }
+              <Button amSize='lg' className="treebtn" onClick = {
+               this._showtree.bind(this)
+              }>查看我的所有章节结构</Button>
+              <button amSize='lg' className="backbtn" ref="back" onClick = {
+               this._back.bind(this)
+             }>返回</button>
             </div>
           </div>
           <div className="left2">
@@ -331,7 +351,6 @@ class ChapIndexs extends React.Component {
             }
           </div>
           <div className="center">
-            <Chaptree/>
             <div className="inner">center</div>
           </div>
           <div className="right">right</div>
@@ -343,7 +362,14 @@ class ChapIndexs extends React.Component {
 }
 
 class Chaptree extends React.Component {
-
+/*
+  constructor(props) {
+    super(props);
+    this.state = {
+      cancelMain: false
+    };
+  }
+*/
   render() {
     //取到一共有多少个主章节
     let lastindex;
@@ -362,12 +388,9 @@ class Chaptree extends React.Component {
         }
       }
     }
-
-
     // console.log(subChap[0]);
     return (
       <div className="tree">
-        <Button amSize='lg'>查看我的所有章节结构</Button>
         <div className="chap-tree">
           {
             subChap.map((data) => {
