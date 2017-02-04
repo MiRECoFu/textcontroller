@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import {
   BosClient
 } from 'bce-sdk-js';
-
+import {Editor, EditorState} from 'draft-js';
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
@@ -300,9 +300,9 @@ class ChapIndexs extends React.Component {
       <div className="parent">
       <div className="header">top</div>
         <div className="main">
-        <div className="mask" ref='mask'>
-          <Chaptree data={subChap}/>
-        </div>
+          <div className="mask" ref='mask'>
+            <Chaptree data={subChap}/>
+          </div>
           <div className="left1">
             <div className="fatherChap">
               <Button
@@ -394,6 +394,8 @@ class ChapIndexs extends React.Component {
           <div className="center">
             <div className="inner">
               <MarkDown />
+              <div>word版富文本编辑器</div>
+              <MyEditor />
             </div>
           </div>
           <div className="right">right</div>
@@ -424,13 +426,13 @@ class MarkDown extends React.Component {
     return (
       <div>
         <Form>
-          <Input 
+          <Input
             className="markdownInput"
             id="markdownInput"
-            type="textarea" 
-            label="文本域" 
+            type="textarea"
+            label="文本域"
             placeholder="说点神马..."
-            ref="md" 
+            ref="md"
             onChange={()=>{this._showMd()}}
           />
         </Form>
@@ -441,6 +443,21 @@ class MarkDown extends React.Component {
     );
   }
 }
+
+class MyEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: EditorState.createEmpty()};
+    this.onChange = (editorState) => this.setState({editorState});
+    //this.handleKeyCommand = this.handleKeyCommand.bind(this);
+  }
+  render() {
+    return (
+        <Editor editorState={this.state.editorState} onChange={this.onChange} handleKeyCommand={this.handleKeyCommand} className="editorInput"/>
+    );
+  }
+}
+
 class Chaptree extends React.Component {
   /*
     constructor(props) {
