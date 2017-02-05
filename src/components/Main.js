@@ -8,12 +8,16 @@ import ReactMarkdown from 'react-markdown';
 import {
   BosClient
 } from 'bce-sdk-js';
-import {Editor, EditorState} from 'draft-js';
+
+import MyEditor from './MyEditor.js'
+
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
+
+
 
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
@@ -393,7 +397,6 @@ class ChapIndexs extends React.Component {
           </div>
           <div className="center">
             <div className="inner">
-              <MarkDown />
               <div>word版富文本编辑器</div>
               <MyEditor />
             </div>
@@ -402,58 +405,6 @@ class ChapIndexs extends React.Component {
         </div>
         <div className="footer">bottom</div>
       </div>
-    );
-  }
-}
-class MarkDown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-    };
-  }
-  _showMd() {
-    this.setState({
-      value: this.refs.md.getValue()
-    });
-  }
-  render() {
-    // var input = '# This is a header\n\nAnd this is a paragraph';
-    if (this.state.value) {
-      var input = this.state.value;
-    }
-
-    return (
-      <div>
-        <Form>
-          <Input
-            className="markdownInput"
-            id="markdownInput"
-            type="textarea"
-            label="文本域"
-            placeholder="说点神马..."
-            ref="md"
-            onChange={()=>{this._showMd()}}
-          />
-        </Form>
-        <div className="markdown">
-          <ReactMarkdown className="reactmd" source={input} />
-        </div>
-      </div>
-    );
-  }
-}
-
-class MyEditor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
-    //this.handleKeyCommand = this.handleKeyCommand.bind(this);
-  }
-  render() {
-    return (
-        <Editor editorState={this.state.editorState} onChange={this.onChange} handleKeyCommand={this.handleKeyCommand} className="editorInput"/>
     );
   }
 }
@@ -505,7 +456,6 @@ class Chaptree extends React.Component {
     );
   }
 }
-
 
 class AppComponent extends React.Component {
 
