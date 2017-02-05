@@ -284,6 +284,7 @@ class ChapIndexs extends React.Component {
     }
     let subChap = [];
     //将mainIndex相同的章节放在一个数组中
+
     for (let i = 1; i <= lastindex; i++) {
       subChap[i - 1] = [];
       for (let j = 0; j < chapterDatas.length; j++) {
@@ -298,7 +299,11 @@ class ChapIndexs extends React.Component {
         subChap.splice(index, 1);
       }
     });
-
+    subChap.forEach((item, index) => {
+      if (item.length == 0) {
+        subChap.splice(index, 1);
+      }
+    });
 
     return (
       <div className="parent">

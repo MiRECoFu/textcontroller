@@ -1,6 +1,7 @@
 'use strict';
 require('styles/RichEditor.css')
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {
   convertToRaw,
   CompositeDecorator,
