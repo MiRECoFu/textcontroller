@@ -4,8 +4,8 @@ require('styles/App.css');
 
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactMarkdown from 'react-markdown';
+// import ReactDOM from 'react-dom';
+
 import {
   BosClient
 } from 'bce-sdk-js';
@@ -467,7 +467,7 @@ class AppComponent extends React.Component {
 
   render() {
     return (
-      <section className="workplace" ref="workplace">
+      <section className="workplace" >
         <section className="controllnav">
             <ChapIndexs/>
         </section>
