@@ -1,5 +1,6 @@
 'use strict';
 require('styles/RichEditor.css')
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -12,7 +13,7 @@ import {
   RichUtils
 } from 'draft-js';
 
-import AMUIReact from 'amazeui-react';
+// import AMUIReact from 'amazeui-react';
 
 // var Button = AMUIReact.Button;
 
@@ -35,7 +36,7 @@ class RichEditorExample extends React.Component {
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
   }
   componentDidMount() {
-    this.focus = () => this.refs.editor.focus();
+    // this.focus = () => this.refs.editor.focus();
   }
   _handleKeyCommand(command) {
     const {
