@@ -397,7 +397,7 @@ class ChapIndexs extends React.Component {
           </div>
           <div className="center">
             <div className="inner">
-
+              <MarkDown />
               <div>word版富文本编辑器</div>
               <MyEditor />
             </div>
@@ -405,6 +405,44 @@ class ChapIndexs extends React.Component {
           <div className="right">right</div>
         </div>
         <div className="footer">bottom</div>
+      </div>
+    );
+  }
+}
+class MarkDown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
+  }
+  _showMd() {
+    this.setState({
+      value: this.refs.md.getValue()
+    });
+  }
+  render() {
+    // var input = '# This is a header\n\nAnd this is a paragraph';
+    if (this.state.value) {
+      var input = this.state.value;
+    }
+
+    return (
+      <div>
+        <Form>
+          <Input
+            className="markdownInput"
+            id="markdownInput"
+            type="textarea"
+            label="文本域"
+            placeholder="说点神马..."
+            ref="md"
+            onChange={()=>{this._showMd()}}
+          />
+        </Form>
+        <div className="markdown">
+          <ReactMarkdown className="reactmd" source={input} />
+        </div>
       </div>
     );
   }
