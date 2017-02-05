@@ -1,6 +1,5 @@
 'use strict'
 
-
 var storage = {}
 
 //封装方法
