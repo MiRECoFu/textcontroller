@@ -8,17 +8,9 @@ import ReactMarkdown from 'react-markdown';
 import {
   BosClient
 } from 'bce-sdk-js';
-<<<<<<< HEAD
 
 import MyEditor from './MyEditor.js'
 
-=======
-import {
-  Editor,
-  EditorState,
-  RichUtils
-} from 'draft-js';
->>>>>>> f6410224fde6b7a62f5ce28b5af45904ce534bfc
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
