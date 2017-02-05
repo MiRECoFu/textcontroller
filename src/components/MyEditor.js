@@ -26,6 +26,7 @@ class RichEditorExample extends React.Component {
       editorState: EditorState.createEmpty()
     };
 
+    this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => this.setState({
       editorState
     });
@@ -35,9 +36,7 @@ class RichEditorExample extends React.Component {
     this.toggleBlockType = (type) => this._toggleBlockType(type);
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
   }
-  componentDidMount() {
-    // this.focus = () => this.refs.editor.focus();
-  }
+
   _handleKeyCommand(command) {
     const {
       editorState
