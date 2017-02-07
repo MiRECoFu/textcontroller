@@ -13,7 +13,7 @@ class RichEditorExample extends React.Component {
     editor.create();
     console.log(div);
     return (
-      <div 
+      <div
         ref = "div1"
       ></div>
     );
