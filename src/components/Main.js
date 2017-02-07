@@ -1,24 +1,21 @@
-
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
 
 import React from 'react';
 // import ReactDOM from 'react-dom';
-//import jquery from 'jquery';
+
 import {
   BosClient
 } from 'bce-sdk-js';
 
-import MyEditor from './MyEditor.js'
-import Wangeditor from './wangeditor.js'
+import MyEditor from './MyEditorNew.js'
+
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
-
-
 
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
@@ -47,6 +44,7 @@ var Storage = require('../storage/storage.js');
 
 Storage.set('user', Datas)
 console.log(Storage.get('user'))
+
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -403,7 +401,7 @@ class ChapIndexs extends React.Component {
           <div className="center">
             <div className="inner">
               <div>word版富文本编辑器</div>
-              <Wangeditor />
+              <MyEditor />
             </div>
           </div>
           <div className="right">right</div>
