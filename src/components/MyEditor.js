@@ -10,7 +10,9 @@ import {
   Editor,
   EditorState,
   Entity,
-  RichUtils
+  RichUtils,
+  getDefaultKeyBinding,
+  KeyBindingUtil
 } from 'draft-js';
 
 // import AMUIReact from 'amazeui-react';

@@ -5,13 +5,13 @@ require('styles/App.css');
 
 import React from 'react';
 // import ReactDOM from 'react-dom';
-
+//import jquery from 'jquery';
 import {
   BosClient
 } from 'bce-sdk-js';
 
 import MyEditor from './MyEditor.js'
-
+import Wangeditor from './wangeditor.js'
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
@@ -47,7 +47,6 @@ var Storage = require('../storage/storage.js');
 
 Storage.set('user', Datas)
 console.log(Storage.get('user'))
-
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -404,7 +403,7 @@ class ChapIndexs extends React.Component {
           <div className="center">
             <div className="inner">
               <div>word版富文本编辑器</div>
-              <MyEditor />
+              <Wangeditor />
             </div>
           </div>
           <div className="right">right</div>
