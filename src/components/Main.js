@@ -1,4 +1,3 @@
-
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
@@ -10,15 +9,13 @@ import {
   BosClient
 } from 'bce-sdk-js';
 
-import MyEditor from './MyEditor.js'
+import MyEditor from './MyEditorNew.js'
 
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
-
-
 
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
