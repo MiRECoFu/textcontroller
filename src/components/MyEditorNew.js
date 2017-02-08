@@ -11,6 +11,11 @@ class RichEditorExample extends React.Component {
     // 生成编辑器
 
     var editor = new wangEditor(div);
+    editor.config.uploadImgUrl = '/server/upload/img';
+    editor.config.uploadParams = {
+      'phone': localStorage.phone
+    };
+    editor.config.uploadImgFileName = 'photo';
     editor.create();
   }
   render() {
@@ -18,6 +23,8 @@ class RichEditorExample extends React.Component {
     return (
       <div
         ref = "div1"
+        style = {{height: '1000px',
+                  width: '100%'}}
       ></div>
     );
   }
