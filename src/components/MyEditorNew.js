@@ -1,5 +1,6 @@
 'use strict';
-var wangeditor = require('wangeditor')
+var wangeditor = require('wangeditor');
+require('components/plugin.js');
 
 import React from 'react';
 import ReactDOM from 'react-dom';

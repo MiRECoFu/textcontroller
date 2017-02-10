@@ -8,7 +8,7 @@ import React from 'react';
 import {
   BosClient
 } from 'bce-sdk-js';
-
+var $ = require('jquery');
 import MyEditor from './MyEditorNew.js'
 
 import AMUIReact from 'amazeui-react';
@@ -16,7 +16,6 @@ var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
-
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
   credentials: {
@@ -24,27 +23,30 @@ const config = {
     sk: '114576782dd448b89c8e4b2b2db551be' //您的SecretAccessKey
   }
 };
-/*
-let bucket = 'my-bucket';
-let key = 'hello.js';
+
+let bucket = 'mireco-15651783396-f753f3fb1f3150e6ccb3f0f9666a347d';
+let key = 'chapData.json';
 let client = new BosClient(config);
 
 
   client.putObjectFromString(bucket, key, 'hello world')
     .then(response => console.log(response))    // 成功
     .catch(error => console.error(error));
-*/
+
 //拿到储存章节信息的json文件，转化为数组
 
 let Datas = require('../data/chapData.json');
 let chapterDatas = Datas.data;
 let child = [];
 
+
 var Storage = require('../storage/storage.js');
 
 Storage.set('user', Datas)
 console.log(Storage.get('user'))
 
+var tipSec = require('../components/plugin.js');
+console.log(tipSec);
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -400,7 +402,8 @@ class ChapIndexs extends React.Component {
           </div>
           <div className="center">
             <div className="inner">
-              <Input type="text" className="chapNameInput" placeholder="输入章节题目"/>
+              <Input type="text" className="parentchapName" placeholder="父章节名"/>
+              <Input type="text" className="chapNameInput" placeholder="输入章节/文章题目"/>
               <MyEditor />
             </div>
           </div>
