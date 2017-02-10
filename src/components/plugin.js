@@ -104,15 +104,6 @@ var $tipSec = [];
 
 
 
-        /*
-        $txt.on('click', 'p', function (e) {
-            var p = e.currentTarget;
-            var $p = $(e.currentTarget);
-            $p.addClass('choosed');
-            console.log(p.textContent);
-            console.log(p.className);
-        });
-        */
         $txt.on('mouseover', 'p', function (e) {
             var $table = $(e.currentTarget);
 

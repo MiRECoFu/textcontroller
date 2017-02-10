@@ -3,12 +3,10 @@ require('styles/App.css');
 
 
 import React from 'react';
-// import ReactDOM from 'react-dom';
-
-import {
-  BosClient
-} from 'bce-sdk-js';
+import ReactDOM from 'react-dom';
 var $ = require('jquery');
+// import Client from '../config/bcesdk.js'
+// import Client from '../config/qiniusdk.js'
 import MyEditor from './MyEditorNew.js'
 
 import AMUIReact from 'amazeui-react';
@@ -16,6 +14,24 @@ var Button = AMUIReact.Button;
 var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
+
+//拿到储存章节信息的json文件，转化为数组
+
+let Datas = require('../data/chapData.json');
+let chapterDatas = Datas.data;
+let child = [];
+
+var Storage = require('../storage/storage.js');
+var tipSec = require('../components/plugin.js');
+console.log(tipSec);
+
+
+import {
+  BosClient
+} from 'bce-sdk-js';
+
+let bucketName = 'mireco-15651783396-f753f3fb1f3150e6ccb3f0f9666a347d';
+
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
   credentials: {
@@ -24,29 +40,14 @@ const config = {
   }
 };
 
-let bucket = 'mireco-15651783396-f753f3fb1f3150e6ccb3f0f9666a347d';
-let key = 'chapData.json';
-let client = new BosClient(config);
+const bosClient = new BosClient(config);
 
+const objname = 'datas.json'
 
-  client.putObjectFromString(bucket, key, 'hello world')
-    .then(response => console.log(response))    // 成功
-    .catch(error => console.error(error));
+// function type(obj) {
+//   return Object.prototype.toString.call(obj).slice(8, -1);
+// }
 
-//拿到储存章节信息的json文件，转化为数组
-
-let Datas = require('../data/chapData.json');
-let chapterDatas = Datas.data;
-let child = [];
-
-
-var Storage = require('../storage/storage.js');
-
-Storage.set('user', Datas)
-console.log(Storage.get('user'))
-
-var tipSec = require('../components/plugin.js');
-console.log(tipSec);
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -91,6 +92,7 @@ class ChapIndexs extends React.Component {
 
     // console.log(count + 'add')
     chapterDatas.push(nextChap);
+    Storage.set('user', Datas)
   }
 
 
@@ -114,7 +116,7 @@ class ChapIndexs extends React.Component {
 
     child = [];
     chapterDatas.splice(chapterDatas.indexOf(obj), 1);
-
+    Storage.set('user', Datas)
   }
 
   //创建副本
@@ -138,6 +140,7 @@ class ChapIndexs extends React.Component {
     };
 
     chapterDatas.splice(chapterDatas.indexOf(obj) + 1, 0, nextChap);
+    Storage.set('user', Datas)
   }
 
   _showChid(key, e) {
@@ -178,6 +181,7 @@ class ChapIndexs extends React.Component {
     this.setState({
       namevaluechange: true
     });
+    Storage.set('user', Datas)
   }
 
   // 隐藏编辑区域
@@ -205,6 +209,7 @@ class ChapIndexs extends React.Component {
       chidvisible: true,
       childcount: child.length
     });
+    Storage.set('user', Datas)
   }
 
   //删除子章节
@@ -215,6 +220,7 @@ class ChapIndexs extends React.Component {
     })
     child.splice(key, 1);
     chapterDatas[this.state.key].childChap = child;
+    Storage.set('user', Datas)
   }
 
   //显示子章节文本输入框
@@ -263,6 +269,7 @@ class ChapIndexs extends React.Component {
     this.setState({
       treechange: true
     });
+    Storage.set('user', Datas)
   }
   _back() {
     let treebtn = this.refs['mask'];
@@ -275,6 +282,12 @@ class ChapIndexs extends React.Component {
   }
 
   render() {
+    // Storage.set('user', Datas)
+    let chapterStr = Storage.get('user');
+    bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
+      .then(response => console.log(response)) // 成功
+      .catch(error => console.error(error));
+
     //取到一共有多少个主章节
     let lastindex;
     if (chapterDatas.length == 0) {
@@ -402,8 +415,7 @@ class ChapIndexs extends React.Component {
           </div>
           <div className="center">
             <div className="inner">
-              <Input type="text" className="parentchapName" placeholder="父章节名"/>
-              <Input type="text" className="chapNameInput" placeholder="输入章节/文章题目"/>
+              <div>word版富文本编辑器</div>
               <MyEditor />
             </div>
           </div>
