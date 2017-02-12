@@ -341,9 +341,10 @@ class ChapIndexs extends React.Component {
                   let index = data.mainIndex;
                   let name = data.chapterName;
                   let text = data.chapterSum;
+                  let mirror = data.mirror;
                   return(
                     <div
-                      className="chapBox"
+                      className={"chapBox"+mirror}
                       onClick={()=>{this._showChid(key,event)}}
                     >
                       <div className="chapItem" >

@@ -46,10 +46,18 @@ html,body{
     height: 40px;
     margin-left: 28px;
     margin-top: 10px;
-    margin-bottom: 10px;
   }
-  .chapBox{
+  .chapBoxfalse{
+    height: 90px;
     background: #ee735c;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chapBoxtrue{
+    width: 200px;
+    height: 90px;
+    background: #ffa07a;
     position: relative;
     overflow: hidden;
   }
