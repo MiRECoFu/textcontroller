@@ -60,12 +60,17 @@ class ChapIndexs extends React.Component {
       key: 0,
       namevaluechange: false,
       childcount: 0,
-      treechange: false
+      treechange: false,
+      childName: '',
     };
   }
 
   componentWillMount() {
     child = chapterDatas[0].childChap;
+    this.setState({
+      childName: child[0].chapterName
+    });
+    // console.log(child)
   }
 
   //点击为chapterDatas数组添加新的一组章节数据项
@@ -261,6 +266,18 @@ class ChapIndexs extends React.Component {
     console.log(child)
     chapterDatas[this.state.key].childChap = child;
   }
+
+  //显示文本结构
+  _showSelf(obj, key, e) {
+    let childName = obj.chapterName;
+    this.setState({
+      childName,
+    });
+    // console.log(childName)
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   _showtree() {
     let treebtn = this.refs['mask'];
     treebtn.style.display = 'block';
@@ -285,7 +302,7 @@ class ChapIndexs extends React.Component {
     // Storage.set('user', Datas)
     let chapterStr = Storage.get('user');
     bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
-      .then(response => console.log(response)) // 成功
+      .then(response => console.log("success")) // 成功
       .catch(error => console.error(error));
 
     //取到一共有多少个主章节
@@ -390,7 +407,7 @@ class ChapIndexs extends React.Component {
                   return(
                     <div
                       className = "childChapBox"
-
+                      onClick={()=>{this._showSelf(data,key,event)}}
                     >
                       <div className='childItem'>
                         <span>{childId}</span>
@@ -417,6 +434,7 @@ class ChapIndexs extends React.Component {
           <div className="center">
             <div className="inner">
               <div>word版富文本编辑器</div>
+              <div className="chapNameInputTest">{this.state.childName}</div>
               <Input placeholder="父章节名" className="parentchapName"/>
               <Input placeholder="子章节名" className="chapNameInput"/>
               <MyEditor />
