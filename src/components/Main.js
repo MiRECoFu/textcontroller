@@ -419,7 +419,10 @@ class ChapIndexs extends React.Component {
               <MyEditor />
             </div>
           </div>
-          <div className="right">right</div>
+          <div className="right">
+          right
+          {tipSec}
+          </div>
         </div>
         <div className="footer">bottom</div>
       </div>

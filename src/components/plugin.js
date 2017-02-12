@@ -21,7 +21,7 @@ var $tipSec = [];
         //var $delete = $('<a href="#"><i class="wangeditor-menu-img-trash-o"></i></a>');
         //var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
         var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
-
+        var $inputBar = $('<input />')
         function render() {
             if (isRendered) {
                 return;
