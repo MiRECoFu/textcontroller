@@ -21,7 +21,8 @@ var $tipSec = [];
         //var $delete = $('<a href="#"><i class="wangeditor-menu-img-trash-o"></i></a>');
         //var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
         var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
-        var $inputBar = $('<input />')
+        var $inputBar = $('<input style={display: none}/>');
+        var $tipDiv = $('<div></div>');
         function render() {
             if (isRendered) {
                 return;
@@ -32,7 +33,8 @@ var $tipSec = [];
 
             // 拼接 渲染到页面上
             $toolbar.append($triangle)
-                    .append($zoomBig);
+                    .append($zoomBig)
+                    .append($inputBar);
             editor.$editorContainer.append($toolbar);
             isRendered = true;
         }
@@ -49,6 +51,8 @@ var $tipSec = [];
             // 放大
             $zoomBig.click(function (e) {
               $tipSec.push(<input />);
+              $tipDiv.append($inputBar);
+
             });
         }
         // 显示 toolbar
@@ -79,7 +83,6 @@ var $tipSec = [];
 
             // 显示（方便计算 margin）
             $toolbar.show();
-
             // 计算 margin
             var width = $toolbar.outerWidth();
             marginLeft = $txt.outerWidth();

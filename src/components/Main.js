@@ -416,6 +416,8 @@ class ChapIndexs extends React.Component {
           <div className="center">
             <div className="inner">
               <div>word版富文本编辑器</div>
+              <Input placeholder="父章节名" className="parentchapName"/>
+              <Input placeholder="子章节名" className="chapNameInput"/>
               <MyEditor />
             </div>
           </div>
