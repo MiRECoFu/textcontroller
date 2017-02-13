@@ -1,0 +1,63 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+}
+.header {
+  height: 40px;
+  background-color: rgb(226, 226, 226);
+
+  .studio-name{
+    float: right;
+    width: 100px;
+  }
+  .avatar{
+    float: right;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.main{
+
+
+  .nav{
+    min-width: 200px;
+    background-color: rgb(176, 176, 176);
+    padding: 30px;
+    .new-doc{
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 80px;
+      background-color: rgb(213, 213, 213);
+      border-radius: 10px;
+    }
+    ul li{
+      list-style: none;
+      padding: 10px 0;
+    }
+  }
+
+  .content{
+    padding: 30px 20px;
+
+    .doc-item{
+      display: block;
+      padding: 5px;
+      float: left;
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      text-align: center;
+      margin: 0 10px;
+      background-color: rgb(198, 198, 198);
+    }
+  }
+}
