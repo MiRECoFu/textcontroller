@@ -92,7 +92,8 @@ class ChapIndexs extends React.Component {
       chapterName: '请点击编辑命名',
       mirror: false,
       chapterSum: '',
-      childChap: []
+      childChap: [],
+      mirrorshow: false
     }
 
     // console.log(count + 'add')
@@ -297,6 +298,18 @@ class ChapIndexs extends React.Component {
       treechange: true
     });
   }
+  _showMirror(main) {
+    let $mirrors = $('.chapItem'+main+'true');
+    console.log($mirrors);
+    if($mirrors.css('display','block')) {
+      $mirrors.css('display','none');
+    } else {
+      $mirrors.css('display','block');
+    }
+    this.setState({
+      mirrorshow: !this.state.mirrorshow
+    });
+  }
 
   render() {
     // Storage.set('user', Datas)
@@ -359,18 +372,21 @@ class ChapIndexs extends React.Component {
                   let name = data.chapterName;
                   let text = data.chapterSum;
                   let mirror = data.mirror;
+                  let main = data.mainIndex;
                   return(
+                    <div className={"chapItem"+main+mirror} >
                     <div
                       className={"chapBox"+mirror}
                       onClick={()=>{this._showChid(key,event)}}
                     >
-                      <div className="chapItem" >
+                      <div>
                         <div>{key+1}.章节名: {name}</div>
                         <div>章节简介: {text}{data.mirror?'副本':null}</div>
                         <span className="editChapP">
                           <Button amSize="xs" onClick={()=>{this._showInputChap(key)}}>编辑</Button>
                           <Button amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
                           <Button amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
+                          <Button amSize="xs" className={'show'+mirror} onMouseUp={()=>{this._showMirror(main)}}></Button>
                           <input
                             className="inputChap"
                             ref={'inputChap'+key}
@@ -383,6 +399,7 @@ class ChapIndexs extends React.Component {
                         </span>
                       </div>
 
+                    </div>
                     </div>
                   );
                 })

@@ -65,6 +65,12 @@ html,body{
     position: absolute;
     top: 0
   }
+  .showfalse{
+    display: inline-block;
+  }
+  .showtrue{
+    display: none;
+  }
   .inputChap{
     position: absolute;
     top: 21px;
@@ -120,7 +126,7 @@ html,body{
   }
   /*word版本富文本部分*/
   .chapNameInputTest{
-    
+
   }
   .parentchapName{
     width: 100%;
