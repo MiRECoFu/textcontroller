@@ -4,6 +4,7 @@ require('styles/App.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router'
 var $ = require('jquery');
 // import Client from '../config/bcesdk.js'
 // import Client from '../config/qiniusdk.js'
@@ -16,9 +17,10 @@ var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 
 //拿到储存章节信息的json文件，转化为数组
-
-let Datas = require('../data/chapData.json');
-let chapterDatas = Datas.data;
+// let Datas = require('../data/chapData.json');
+// let chapterDatas = Datas.data;
+let presetDatas = require('../data/docData.json');
+let chapterDatas = presetDatas[0].data;
 let child = [];
 
 var Storage = require('../storage/storage.js');
@@ -53,6 +55,8 @@ const objname = 'datas.json'
 class ChapIndexs extends React.Component {
   constructor(props) {
     super(props);
+    // 这里可以从URL获取到Doc的ID，然后请求服务器获得具体的文章，简化开发默认为预设数据第一个
+    console.log(this.props.docId);
     this.state = {
       count: 0,
       mainindex: chapterDatas.length + 1,
@@ -313,10 +317,10 @@ class ChapIndexs extends React.Component {
 
   render() {
     // Storage.set('user', Datas)
-    let chapterStr = Storage.get('user');
-    bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
-      .then(response => console.log("success")) // 成功
-      .catch(error => console.error(error));
+    // let chapterStr = Storage.get('user');
+    // bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
+    //   .then(response => console.log("success")) // 成功
+    //   .catch(error => console.error(error));
 
     //取到一共有多少个主章节
     let lastindex;
@@ -350,7 +354,9 @@ class ChapIndexs extends React.Component {
 
     return (
       <div className="parent">
-      <div className="header">top</div>
+      <div className="header">
+        <Link to="/studio" >返回我的工作室</Link>
+      </div>
         <div className="main">
           <div className="mask" ref='mask'>
             <Chaptree data={subChap}/>
@@ -519,10 +525,11 @@ class Chaptree extends React.Component {
 class AppComponent extends React.Component {
 
   render() {
+    let docId = this.props.params.docId;
     return (
       <section className="workplace" >
         <section className="controllnav">
-            <ChapIndexs/>
+            <ChapIndexs docId={docId}/>
         </section>
         <section className="editplace">
         </section>
