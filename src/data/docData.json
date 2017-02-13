@@ -1,0 +1,74 @@
+[
+  {
+    "total": 0,
+    "title": "测试文章1",
+    "data": [{
+      "mainIndex": 1,
+      "chapterId": "id0",
+      "chapterName": "测试章节1",
+      "chapterSum": "lalala",
+      "mirror": false,
+      "childChap": [{
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节1a"
+      }, {
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节2"
+      }]
+
+    }, {
+      "mainIndex": 2,
+      "chapterId": "id0",
+      "chapterName": "测试章节0",
+      "chapterSum": "lalala",
+      "mirror": false,
+      "childChap": [{
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节1b"
+      }, {
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节2"
+      }]
+    }]
+  },
+  {
+    "total": 0,
+    "title": "测试文章2",
+    "data": [{
+      "mainIndex": 1,
+      "chapterId": "id0",
+      "chapterName": "哈哈哈",
+      "chapterSum": "lalala",
+      "mirror": false,
+      "childChap": [{
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节1a"
+      }, {
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节2"
+      }]
+
+    }, {
+      "mainIndex": 2,
+      "chapterId": "id0",
+      "chapterName": "哈哈哈",
+      "chapterSum": "lalala",
+      "mirror": false,
+      "childChap": [{
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节1b"
+      }, {
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节2"
+      }]
+    }]
+  }
+]
