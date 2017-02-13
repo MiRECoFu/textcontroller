@@ -17,10 +17,9 @@ var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 
 //拿到储存章节信息的json文件，转化为数组
-// let Datas = require('../data/chapData.json');
-// let chapterDatas = Datas.data;
 let presetDatas = require('../data/docData.json');
-let chapterDatas = presetDatas[0].data;
+let Datas = presetDatas[0]
+let chapterDatas = Datas.data;
 let child = [];
 
 var Storage = require('../storage/storage.js');
