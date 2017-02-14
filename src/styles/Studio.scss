@@ -38,6 +38,10 @@ html,body{
       line-height: 80px;
       background-color: rgb(213, 213, 213);
       border-radius: 10px;
+      cursor: pointer;
+    }
+    .new-doc:hover{
+      color: #64B5F6;
     }
     ul li{
       list-style: none;

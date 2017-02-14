@@ -12,6 +12,7 @@ html,body{
 .parent{
   display: flex;
   flex-direction: column;
+
 }
 /*头部*/
 .header{

@@ -4,7 +4,9 @@ require('styles/App.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router'
+import {
+  Link
+} from 'react-router'
 var $ = require('jquery');
 // import Client from '../config/bcesdk.js'
 // import Client from '../config/qiniusdk.js'
@@ -166,7 +168,8 @@ class ChapIndexs extends React.Component {
     this.setState({
       key: key,
       chidvisible: true,
-      childcount: child.length
+      childcount: child.length,
+      childName: child[0].chapterName
     });
     e.stopPropagation();
     e.preventDefault();
@@ -302,12 +305,12 @@ class ChapIndexs extends React.Component {
     });
   }
   _showMirror(main) {
-    let $mirrors = $('.chapItem'+main+'true');
+    let $mirrors = $('.chapItem' + main + 'true');
     console.log($mirrors);
-    if($mirrors.css('display','block')) {
-      $mirrors.css('display','none');
+    if ($mirrors.css('display', 'block')) {
+      $mirrors.css('display', 'none');
     } else {
-      $mirrors.css('display','block');
+      $mirrors.css('display', 'block');
     }
     this.setState({
       mirrorshow: !this.state.mirrorshow
