@@ -21,8 +21,10 @@ var $tipSec = [];
         //var $delete = $('<a href="#"><i class="wangeditor-menu-img-trash-o"></i></a>');
         //var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
         var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
-        var $inputBar = $('<input style={display: none}/>');
+        var $inputBar = $('<input />');
         var $tipDiv = $('<div></div>');
+        var $okBtn = $('<button>确定</button>');
+        var $cancelBtn = $('<button>取消</button>');
         function render() {
             if (isRendered) {
                 return;
@@ -32,9 +34,9 @@ var $tipSec = [];
             bindEvent();
 
             // 拼接 渲染到页面上
-            $toolbar.append($triangle)
-                    .append($zoomBig)
-                    .append($inputBar);
+            $toolbar.append($inputBar)
+                    .append($okBtn)
+                    .append($cancelBtn);
             editor.$editorContainer.append($toolbar);
             isRendered = true;
         }
@@ -49,10 +51,11 @@ var $tipSec = [];
                 }
             }
             // 放大
-            $zoomBig.click(function (e) {
-              $tipSec.push(<input />);
-              $tipDiv.append($inputBar);
-
+            $inputBar.click(function (e) {
+              $toolbar.show();
+            });
+            $inputBar.focusin(function (e) {
+              $toolbar.show();
             });
         }
         // 显示 toolbar
@@ -129,7 +132,7 @@ var $tipSec = [];
         }).on('click keypress scroll', function (e) {
             setTimeout(hide, 100);
         });
-        E.$body.on('click keypress scroll', function (e) {
+        E.$body.on('scroll', function (e) {
             setTimeout(hide, 100);
         });
     });

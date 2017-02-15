@@ -304,6 +304,7 @@ class ChapIndexs extends React.Component {
       treechange: true
     });
   }
+  /*
   _showMirror(main) {
     let $mirrors = $('.chapItem' + main + 'true');
     console.log($mirrors);
@@ -316,7 +317,7 @@ class ChapIndexs extends React.Component {
       mirrorshow: !this.state.mirrorshow
     });
   }
-
+*/
   render() {
     // Storage.set('user', Datas)
     // let chapterStr = Storage.get('user');
@@ -394,7 +395,6 @@ class ChapIndexs extends React.Component {
                           <Button amSize="xs" onClick={()=>{this._showInputChap(key)}}>编辑</Button>
                           <Button amSize="xs" onClick={()=>{this._delete(data)}}>删除</Button>
                           <Button amSize="xs" onClick={()=>{this._createBre(data)}}>创建副本</Button>
-                          <Button amSize="xs" className={'show'+mirror} onMouseUp={()=>{this._showMirror(main)}}></Button>
                           <input
                             className="inputChap"
                             ref={'inputChap'+key}
