@@ -3,6 +3,7 @@
     "total": 0,
     "title": "三生三世十二里桃花",
     "id": 1,
+    "deleted": false,
     "data": [{
       "mainIndex": 1,
       "chapterId": "id0",
@@ -39,6 +40,7 @@
   {
     "total": 0,
     "title": "人类的敌人是半藏",
+    "deleted": false,
     "id": 2,
     "data": [{
       "mainIndex": 1,
@@ -66,6 +68,28 @@
         "mirror": false,
         "chapterId": "",
         "chapterName": "子章节1b"
+      }, {
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节2"
+      }]
+    }]
+  },
+  {
+    "total": 0,
+    "title": "我已经被删掉了",
+    "deleted": true,
+    "id": 3,
+    "data": [{
+      "mainIndex": 1,
+      "chapterId": "id0",
+      "chapterName": "喝喝",
+      "chapterSum": "lalala",
+      "mirror": false,
+      "childChap": [{
+        "mirror": false,
+        "chapterId": "",
+        "chapterName": "子章节1a"
       }, {
         "mirror": false,
         "chapterId": "",
