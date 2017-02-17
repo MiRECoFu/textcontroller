@@ -18,15 +18,10 @@ var Form = AMUIReact.Form;
 var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 
-//拿到储存章节信息的json文件，转化为数组
-let presetDatas = require('../data/docData.json');
-let Datas = presetDatas[0]
-let chapterDatas = Datas.data;
-let child = [];
 
 var Storage = require('../storage/storage.js');
 var tipSec = require('../components/plugin.js');
-console.log(tipSec);
+// console.log(tipSec);
 
 
 import {
@@ -50,7 +45,27 @@ const objname = 'datas.json'
 // function type(obj) {
 //   return Object.prototype.toString.call(obj).slice(8, -1);
 // }
+let Datas = {};
+let chapterDatas = [];
+let child = [];
 
+//url get post
+import request from '../config/request.js'
+import base from '../config/base.js'
+//拿到储存章节信息的json文件，转化为数组
+request.get(base.api.base, {
+    bucket: bucketName,
+    key: objname
+  })
+  .then((data) => {
+    Datas = data;
+    chapterDatas = Datas.data;
+    console.log(chapterDatas[0])
+  })
+
+// let presetDatas = require('../data/docData.json');
+// let Datas = presetDatas[0]
+// let chapterDatas = Datas.data;
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -71,6 +86,7 @@ class ChapIndexs extends React.Component {
   }
 
   componentWillMount() {
+    //初始化章节信息
     child = chapterDatas[0].childChap;
     this.setState({
       childName: child[0].chapterName
@@ -270,7 +286,7 @@ class ChapIndexs extends React.Component {
       childcount: child.length + 1
     });
     child.splice(key + 1, 0, nextChap);
-    console.log(child)
+    // console.log(child)
     chapterDatas[this.state.key].childChap = child;
   }
 
@@ -296,15 +312,15 @@ class ChapIndexs extends React.Component {
     Storage.set('user', Datas)
   }
   _back() {
-    let treebtn = this.refs['mask'];
-    treebtn.style.display = 'none';
-    let backbtn = this.refs['back'];
-    backbtn.style.display = 'none';
-    this.setState({
-      treechange: true
-    });
-  }
-  /*
+      let treebtn = this.refs['mask'];
+      treebtn.style.display = 'none';
+      let backbtn = this.refs['back'];
+      backbtn.style.display = 'none';
+      this.setState({
+        treechange: true
+      });
+    }
+    /*
   _showMirror(main) {
     let $mirrors = $('.chapItem' + main + 'true');
     console.log($mirrors);

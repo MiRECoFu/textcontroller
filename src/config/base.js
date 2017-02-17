@@ -1,5 +1,14 @@
-'use strict';
+'use strict'
 
-// Settings configured here will be merged into the final config object.
-export default {
+module.exports = {
+  header: {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  },
+  api: {
+    base: 'http://mireco.top:3000/users/getFromBos',
+  }
 }
