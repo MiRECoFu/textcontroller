@@ -1,8 +1,7 @@
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute} from 'react-router'
-import { browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 import Doc from './components/DocEditor';
 import Docs from './components/Docs';

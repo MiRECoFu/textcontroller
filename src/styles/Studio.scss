@@ -30,19 +30,7 @@ html,body{
     min-width: 200px;
     background-color: rgb(176, 176, 176);
     padding: 30px;
-    .new-doc{
-      width: 80px;
-      height: 80px;
-      margin: 0 auto;
-      text-align: center;
-      line-height: 80px;
-      background-color: rgb(213, 213, 213);
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .new-doc:hover{
-      color: #64B5F6;
-    }
+
     ul li{
       list-style: none;
       padding: 10px 0;
@@ -51,6 +39,17 @@ html,body{
 
   .content{
     padding: 30px 20px;
+    
+    .new-doc{
+      text-align: center;
+      background-color: rgb(213, 213, 213);
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .new-doc:hover{
+      color: #64B5F6;
+    }
 
     .doc-item{
       display: block;

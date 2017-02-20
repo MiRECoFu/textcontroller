@@ -4,6 +4,16 @@ let Storage = require('../storage/storage.js');
 class Trash extends React.Component {
   constructor(props) {
     super(props);
+    if(!Storage.get('deletedDocs')){
+      let deletedDocs = [];
+      let presetDatas = require('../data/docData.json');
+      for(let i in presetDatas){
+        if(presetDatas[i].deleted){
+          deletedDocs.push(presetDatas[i]);
+        }
+      }
+      Storage.set('deletedDocs', deletedDocs);
+    }
   }
 
   render(){
