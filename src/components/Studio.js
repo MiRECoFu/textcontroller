@@ -32,6 +32,9 @@ Storage.set('deletedDocs', deletedDocs);
 class Studio extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      docsCount: myDocs.length
+    }
   }
 
   //返回

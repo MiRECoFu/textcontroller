@@ -17,7 +17,7 @@ var $tipSec = [];
 
         var isRendered = false;
         var $toolbar = $('<div class="txt-toolbar"></div>');
-        var $triangle = $('<div class="tip-triangle"></div>');
+        //var $triangle = $('<div class="tip-triangle"></div>');
         //var $delete = $('<a href="#"><i class="wangeditor-menu-img-trash-o"></i></a>');
         //var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
         var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
