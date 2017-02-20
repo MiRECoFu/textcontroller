@@ -335,11 +335,11 @@ class ChapIndexs extends React.Component {
   }
 */
   render() {
-    // Storage.set('user', Datas)
-    // let chapterStr = Storage.get('user');
-    // bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
-    //   .then(response => console.log("success")) // 成功
-    //   .catch(error => console.error(error));
+     Storage.set('user', Datas)
+     let chapterStr = Storage.get('user');
+     bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
+       .then(response => console.log("success")) // 成功
+       .catch(error => console.error(error));
 
     //取到一共有多少个主章节
     let lastindex;
