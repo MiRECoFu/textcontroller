@@ -15,5 +15,8 @@ storage.set = function(key, data) {
     Cookie.write(key, strData);
   }
 }
-
+storage.remove = function(key) {
+  window.localStorage.removeItem(key);
+  return;
+}
 module.exports = storage

@@ -11,6 +11,7 @@ var $ = require('jquery');
 // import Client from '../config/bcesdk.js'
 // import Client from '../config/qiniusdk.js'
 import MyEditor from './MyEditorNew.js'
+import TipContent from './TipContent.js'
 
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
@@ -19,16 +20,14 @@ var Input = AMUIReact.Input;
 // var Icon = AMUIReact.Icon;
 
 
+
 var Storage = require('../storage/storage.js');
 var tipSec = require('../components/plugin.js');
 // console.log(tipSec);
 
-
 import {
   BosClient
 } from 'bce-sdk-js';
-
-let bucketName = 'mireco-15651783396-f753f3fb1f3150e6ccb3f0f9666a347d';
 
 const config = {
   endpoint: 'http://gz.bcebos.com', //传入Bucket所在区域域名
@@ -38,9 +37,11 @@ const config = {
   }
 };
 
-const bosClient = new BosClient(config);
+let bosClient = new BosClient(config);
 
-const objname = 'datas.json'
+const bucketName = 'mireco-15651783396-f753f3fb1f3150e6ccb3f0f9666a347d';
+
+let objname = 'datas.json'
 
 // function type(obj) {
 //   return Object.prototype.toString.call(obj).slice(8, -1);
@@ -52,6 +53,7 @@ let child = [];
 //url get post
 import request from '../config/request.js'
 import base from '../config/base.js'
+
 //拿到储存章节信息的json文件，转化为数组
 request.get(base.api.base, {
     bucket: bucketName,
@@ -60,12 +62,20 @@ request.get(base.api.base, {
   .then((data) => {
     Datas = data;
     chapterDatas = Datas.data;
-    console.log(chapterDatas[0])
+    // console.log(chapterDatas[0])
   })
 
-// let presetDatas = require('../data/docData.json');
-// let Datas = presetDatas[0]
-// let chapterDatas = Datas.data;
+// //拿到储存Tip信息的json文件，转化为数组
+// request.get(base.api.base, {
+//     bucket: bucketName,
+//     key: 'tip.json'
+//   })
+//   .then((data) => {
+//     let tipDatas = data
+//     chapterDatas = tipDatas.data;
+
+//   })
+
 
 //单个章节节点组件
 class ChapIndexs extends React.Component {
@@ -335,11 +345,11 @@ class ChapIndexs extends React.Component {
   }
 */
   render() {
-     Storage.set('user', Datas)
-     let chapterStr = Storage.get('user');
-     bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
-       .then(response => console.log("success")) // 成功
-       .catch(error => console.error(error));
+    Storage.set('user', Datas)
+    let chapterStr = Storage.get('user');
+    bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
+      .then(response => console.log("success")) // 成功
+      .catch(error => console.error(error));
 
     //取到一共有多少个主章节
     let lastindex;
@@ -482,8 +492,8 @@ class ChapIndexs extends React.Component {
             </div>
           </div>
           <div className="right">
-          right
-          {tipSec}
+            <TipContent />
+            {tipSec}
           </div>
         </div>
         <div className="footer">bottom</div>
