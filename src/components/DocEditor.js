@@ -400,15 +400,14 @@ class ChapIndexs extends React.Component {
                 +
               </Button>
               {
-                chapterDatas.map((data)=>{
-                  let key = chapterDatas.indexOf(data);
+                chapterDatas.map((data, key)=>{
                   let index = data.mainIndex;
                   let name = data.chapterName;
                   let text = data.chapterSum;
                   let mirror = data.mirror;
                   let main = data.mainIndex;
                   return(
-                    <div className={"chapItem"+main+mirror} >
+                    <div className={"chapItem"+main+mirror} key={key}>
                     <div
                       className={"chapBox"+mirror}
                       onClick={()=>{this._showChid(key,event)}}
@@ -449,8 +448,7 @@ class ChapIndexs extends React.Component {
             <Button className="newchild" onClick={()=>this._newchild()}>创建新的子章节   </Button>
             {
 
-                child.map((data)=>{
-                  let key = child.indexOf(data);
+                child.map((data, key)=>{
                   let childId = data.chapterId;
                   let childName = data.chapterName;
 
@@ -458,6 +456,7 @@ class ChapIndexs extends React.Component {
                     <div
                       className = "childChapBox"
                       onClick={()=>{this._showSelf(data,key,event)}}
+                      key={key}
                     >
                       <div className='childItem'>
                         <span>{childId}</span>
@@ -515,10 +514,9 @@ class Chaptree extends React.Component {
       <div className="tree">
         <div className="chap-tree">
           {
-            subChap.map((data) => {
-              let key = subChap.indexOf(data);
+            subChap.map((data, subChapKey) => {
               return(
-                <div className='chapLine' key={key}>
+                <div className='chapLine' key={subChapKey}>
                   {
                     data.map((d) => {
                       let childtree = d.childChap;
