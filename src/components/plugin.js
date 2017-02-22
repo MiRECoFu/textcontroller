@@ -38,6 +38,8 @@ var $tipSec = [];
     var txt = editor.txt;
     var $txt = txt.$txt;
     var $currentTarget;
+    //新建一个数组，用来存储不同段落的tip
+    //var $tipArr = [];
 
     var isRendered = false;
     var $toolbar = $('<div class="txt-toolbar"></div>');
@@ -49,6 +51,7 @@ var $tipSec = [];
     var $tipDiv = $('<div></div>');
     var $okBtn = $('<button>确定</button>');
     var $cancelBtn = $('<button>取消</button>');
+    var $tipContent = $('<div>这里是评论内容</div>');
 
     function render() {
       if (isRendered) {
@@ -124,6 +127,48 @@ var $tipSec = [];
       });
     }
 
+/*
+    //显示评论
+    function tipshow() {
+      if ($currentTarget == null) {
+        return;
+      }
+      $currentTarget.addClass('clicked');
+      var tablePosition = $currentTarget.position();
+      var tableTop = tablePosition.top;
+      var tableLeft = tablePosition.left;
+      var tableHeight = $currentTarget.outerHeight();
+      var tableWidth = $currentTarget.outerWidth();
+
+      // --- 定位 tip ---
+
+      // 计算初步结果
+      var top = tableTop + tableHeight;
+      var left = tableLeft;
+      var marginLeft = 0;
+
+      var txtTop = $txt.position().top;
+      var txtHeight = $txt.outerHeight();
+      if (top > (txtTop + txtHeight)) {
+        // top 不得超出编辑范围
+        top = txtTop + txtHeight;
+      }
+
+      // 显示（方便计算 margin）
+      $tipContent.show();
+      // 计算 margin
+      var width = $tipContent.outerWidth();
+      marginLeft = $txt.outerWidth();
+
+      // 定位
+      $tipContent.css({
+        top: top + 5,
+        left: left,
+        'margin-left': marginLeft
+      });
+    }
+*/
+
     // 隐藏 toolbar
     function hide() {
       if ($currentTarget == null) {
@@ -153,9 +198,11 @@ var $tipSec = [];
           // .catch(error => console.error(error));
       }
       $inputBar.val('');
+      var $tipContent = $('<div>这里是评论内容</div>');
+      $toolbar.prepend($tipContent);
     }
 
-    $txt.on('mouseover', 'p', function(e) {
+    $txt.on('mouseover click keypress', 'p', function(e) {
       var $table = $(e.currentTarget);
 
       // 渲染
@@ -185,6 +232,8 @@ var $tipSec = [];
     //点击确认按钮
     $okBtn.on('click', function() {
       renderComment();
+      //editor.$editorContainer.append($tipContent);
+      //tipshow();
     });
 
   });
