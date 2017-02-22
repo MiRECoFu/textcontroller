@@ -144,6 +144,7 @@ var $tipSec = [];
         };
         tipData.data.push(nextTip);
         Storage.set('comment', tipData);
+        $tipSec.push(tipData);
         // console.log(tipData)
         // let tipStr = Storage.get('comment');
         let tipStr = JSON.stringify(tipData);

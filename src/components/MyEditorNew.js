@@ -1,4 +1,6 @@
 'use strict';
+
+let $tipSec = [];
 var wangeditor = require('wangeditor');
 require('components/plugin.js');
 

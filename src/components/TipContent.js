@@ -8,12 +8,12 @@ import {
 // var AMUIReact = require('amazeui-react');
 // var Button = AMUIReact.Button;
 // var Icon = AMUIReact.Icon;
-
+var tipSec = require('../components/plugin.js');
 
 var tipDatas = [];
 var Storage = require('../storage/storage.js');
 
-//从百度取得 tip 
+//从百度取得 tip
 import request from '../config/request.js'
 import base from '../config/base.js'
 
@@ -40,13 +40,21 @@ request.get(base.api.base, {
 class TipContent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tipContent: tipSec
+    };
   }
 
   render() {
-    let tipData = tipDatas
+    let tipData = tipDatas;
+    if(tipSec != this.state.tipContent){
+      this.setState({
+        tipContent: tipSec
+      });
+    }
     return (
       <div>
-        
+
         <div className="tipContent">
           {
             tipData.map((data) => {
