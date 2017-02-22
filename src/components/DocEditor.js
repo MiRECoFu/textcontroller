@@ -11,7 +11,7 @@ var $ = require('jquery');
 // import Client from '../config/bcesdk.js'
 // import Client from '../config/qiniusdk.js'
 import MyEditor from './MyEditorNew.js'
-import TipContent from './TipContent.js'
+// import TipContent from './TipContent.js'
 
 import AMUIReact from 'amazeui-react';
 var Button = AMUIReact.Button;
@@ -22,7 +22,7 @@ var Input = AMUIReact.Input;
 
 
 var Storage = require('../storage/storage.js');
-var tipSec = require('../components/plugin.js');
+// var tipSec = require('../components/plugin.js');
 // console.log(tipSec);
 
 import {
@@ -65,24 +65,19 @@ request.get(base.api.base, {
     // console.log(chapterDatas[0])
   })
 
-// //拿到储存Tip信息的json文件，转化为数组
-// request.get(base.api.base, {
-//     bucket: bucketName,
-//     key: 'tip.json'
-//   })
-//   .then((data) => {
-//     let tipDatas = data
-//     chapterDatas = tipDatas.data;
 
-//   })
-
-
+// let chapterStr = Storage.get('user');
+// console.log(typeof chapterStr)
+// bosClient.putObjectFromBlob(bucketName, 'datatest.json', 'hello world')
+// .then(response => console.log("success"))
 //单个章节节点组件
+
 class ChapIndexs extends React.Component {
   constructor(props) {
     super(props);
     // 这里可以从URL获取到Doc的ID，然后请求服务器获得具体的文章，简化开发默认为预设数据第一个
-    console.log(this.props.docId);
+    // console.log(this.props.docId);
+    child = chapterDatas ? chapterDatas[0].childChap : {};
     this.state = {
       count: 0,
       mainindex: chapterDatas.length + 1,
@@ -91,18 +86,11 @@ class ChapIndexs extends React.Component {
       namevaluechange: false,
       childcount: 0,
       treechange: false,
-      childName: '',
+      childName: child ? child[0].chapterName : '',
+      edit: false
     };
   }
 
-  componentWillMount() {
-    //初始化章节信息
-    child = chapterDatas[0].childChap;
-    this.setState({
-      childName: child[0].chapterName
-    });
-    // console.log(child)
-  }
 
   //点击为chapterDatas数组添加新的一组章节数据项
 
@@ -147,13 +135,17 @@ class ChapIndexs extends React.Component {
     this.setState({
       count: count,
       mainindex: main,
-      childcount: 0
+      childcount: 0,
+      edit: true
     })
 
 
     child = [];
     chapterDatas.splice(chapterDatas.indexOf(obj), 1);
     Storage.set('user', Datas)
+    this.setState({
+      edit: false
+    });
   }
 
   //创建副本
@@ -183,19 +175,25 @@ class ChapIndexs extends React.Component {
   _showChid(key, e) {
     let parent = chapterDatas[key];
 
-    child = parent.childChap;
     if (parent == []) {
       child = [];
     }
     if (chapterDatas.length == 0) {
       child = [];
     }
+
+    if (!this.state.edit) {
+      child = parent.childChap;
+      this.setState({
+        childName: child[0] ? child[0].chapterName : '',
+        childcount: child.length,
+      });
+    }
+    // console.log(child)
     //console.log(child[0].chapterName);
     this.setState({
       key: key,
       chidvisible: true,
-      childcount: child.length,
-      childName: child[0].chapterName
     });
     e.stopPropagation();
     e.preventDefault();
@@ -345,11 +343,12 @@ class ChapIndexs extends React.Component {
   }
 */
   render() {
-    Storage.set('user', Datas)
-    let chapterStr = Storage.get('user');
+    // Storage.set('user', Datas)
+    let chapterStr = JSON.stringify(Storage.get('user'));
+    // console.log(chapterStr)
     bosClient.putObjectFromBlob(bucketName, objname, chapterStr)
       .then(response => console.log("success")) // 成功
-      .catch(error => console.error(error));
+      // .catch(error => console.log(error));
 
     //取到一共有多少个主章节
     let lastindex;
@@ -492,8 +491,6 @@ class ChapIndexs extends React.Component {
             </div>
           </div>
           <div className="right">
-            <TipContent />
-            {tipSec}
           </div>
         </div>
         <div className="footer">bottom</div>

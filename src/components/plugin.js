@@ -150,7 +150,7 @@ var $tipSec = [];
         let tipStr = JSON.stringify(tipData);
         bosClient.putObjectFromBlob(bucketName, objname, tipStr)
           .then(response => console.log('success')) // 成功
-          .catch(error => console.error(error));
+          // .catch(error => console.error(error));
       }
       $inputBar.val('');
     }
@@ -190,4 +190,8 @@ var $tipSec = [];
   });
 
 })();
-module.exports = $tipSec
+
+module.exports = {
+  $tipSec,
+
+}

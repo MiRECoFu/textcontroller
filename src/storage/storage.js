@@ -6,6 +6,7 @@ var storage = {}
 storage.get = function(key) {
   var strStoreDate = window.localStorage ? localStorage.getItem(key) : Cookie.read(key);
   return JSON.parse(strStoreDate);
+  // return strStoreDate;
 }
 storage.set = function(key, data) {
   var strData = JSON.stringify(data)
