@@ -25,23 +25,25 @@ class Studio extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="studio-body">
         <div className="header">
-          <button
+          <div
+            className="back-home"
             onClick={()=>{this._showDocEditor()}}
-          >返回</button>
-          <div className="studio-name">xx工作室</div>
-          <img src="" alt="头像" className="avatar"/>
+          >首页</div>
+          <div className="studio-name">小白工作室</div>
+          <img src="images/avatar.jpg" alt="头像" className="avatar"/>
         </div>
         <div className="main">
           <div className="nav">
+            <img src="images/avatar.jpg" alt="头像" className="nav-avatar"/>
             <ul>
-              <li><Link to='/studio/docs'>我的文档</Link></li>
-              <li><a href="#">协作消息</a></li>
-              <li><Link to="/studio/trash"><Icon icon="trash" /> 回收站</Link></li>
+              <li><Link to='/studio/docs'><Icon icon="book" /><span>我的文档</span></Link></li>
+              <li><a href="#"><Icon icon="comment" /><span>协作消息</span></a></li>
+              <li><Link to="/studio/trash"><Icon icon="trash" /><span>回收站</span></Link></li>
             </ul>
           </div>
-          <div className="content">
+          <div className="main-content">
             {this.props.children}
           </div>
         </div>
